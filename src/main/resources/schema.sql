@@ -1,0 +1,7 @@
+CREATE TABLE User (
+  id CHAR(36),
+  fullName VARCHAR(30) NOT NULL,
+  createdOn VARCHAR(24) NOT NULL,
+  birthday VARCHAR(10) DEFAULT NULL,
+  PRIMARY KEY (id)
+);

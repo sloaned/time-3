@@ -1,0 +1,10 @@
+
+
+.row-vcenter {
+  white-space: nowrap;
+}
+.row-vcenter > * {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html ng-app="timeclockApp">
+  <head>
+    <title>Timeclock</title>
+    <link rel="stylesheet" type="text/css" href="/vendor/bootstrap-3.3.6/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/css/project.css" />
+    
+    <script src="/vendor/angular-1.5.5/angular.js"></script>
+    <script src="/vendor/angular-ui-router-0.2.14/angular-ui-router.min.js"></script>
+    <script src="/vendor/angular-resource-1.5.5/angular-resource.js"></script>
+    
+    <script src="/vendor/lodash-4.12.0/lodash.js"></script>
+    
+    <script src="/js/routes.js"></script>
+    
+    <script src="/js/home/HomeModule.js"></script>
+    <script src="/js/home/HomeController.js"></script>
+    
+    
+    <script src="/js/user/UserModule.js"></script>
+    <script src="/js/user/UserResource.js"></script>
+    <script src="/js/user/UserService.js"></script>
+    <script src="/js/user/UserEditController.js"></script>
+    <script src="/js/user/UserListController.js"></script>
+    <script src="/js/user/UserProfileController.js"></script>
+    <script src="/js/user/UserRegisterController.js"></script>
+    
+    
+    <script src="/js/timeclockApp.js"></script>
+  </head>
+  <body>
+		<header>
+			<nav class="navbar navbar-default">
+				<div class="container-fluid">
+					<ul class="nav navbar-nav">
+						<li><a class="col-xs-3" ui-sref="home">Home</a></li>
+						<li><a class="col-xs-3" ui-sref="user">Users</a></li>
+					</ul>
+				</div>
+			</nav>
+		</header>
+	
+		<div class="container">
+	    <div class="row" ng-show="error">
+	     <div class="alert alert-danger" role="alert" ng-click="error = null"><pre>{{error | json}}</pre></div>
+	    </div>
+	    <section class="row" ui-view></section>
+	    <footer class="row"></footer>
+    </div>
+  </body>
+</html>

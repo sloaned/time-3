@@ -1,0 +1,1 @@
+INSERT INTO User (id, fullName, createdOn, birthday) VALUES ('a724f3b8-d40c-4474-a9b4-5cf32f1fe59e','Admin User','2016-05-20T20:15:32.718Z','1970-07-27');

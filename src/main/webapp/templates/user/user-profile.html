@@ -1,0 +1,26 @@
+<div>
+  <h1>Profile</h1>
+  <div class="row">
+    <div class="col-xs-12">
+      <a class="btn btn-primary" ui-sref="user">Back</a>
+    </div>
+  </div>
+  <hr />
+  <div class="row">
+      <label class="col-xs-3">ID</label><span class="col-xs-9">{{user.id}}</span>
+  </div>
+  <div class="row">
+      <label class="col-xs-3">Full Name</label><span class="col-xs-9">{{user.fullName}}</span>
+  </div>
+  <div class="row">
+      <label class="col-xs-3">Created On</label><span class="col-xs-9">{{user.createdOn | date: 'yyyy-MM-dd HH:mm:ss Z'}}</span>
+  </div>
+  <div class="row">
+      <label class="col-xs-3">Birthday</label><span class="col-xs-9">{{user.birthday | date: 'shortDate'}}</span>
+  </div>
+  <hr />
+  <div class="row" ng-show="user.id">
+      <span class="col-xs-3"><a class="btn btn-primary" ui-sref="user-profile-edit({userId:user.id})">Edit</a></span>
+      <span class="col-xs-3"><button class="btn btn-danger" ng-click="remove(user.id)">Delete</button></span>
+  </div>
+</div>
