@@ -1,5 +1,8 @@
 # Timeclock Project #
 
+[Jira Board](https://catalystit.atlassian.net/projects/TICKTOCK/summary)  
+[Confluence Page](https://catalystit.atlassian.net/wiki/display/CLK)
+
 ## Technologies ##
 
     * Build Tool               - Maven               - 3.3
