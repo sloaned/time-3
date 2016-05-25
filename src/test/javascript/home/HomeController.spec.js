@@ -3,7 +3,7 @@ describe('HomeController', function() {
 	beforeEach(module('timeclockApp.home'));
 	
 	var $controller;
-	var $scope = {};
+	var $scope;
     var controller;
 	
 	beforeEach(inject(function(_$controller_) {
@@ -21,6 +21,5 @@ describe('HomeController', function() {
 	it('Has value set to $scope.prop', function() {
 		expect($scope.prop).toEqual('Here is a value!');
 	});
-	
 	
 });
