@@ -1,6 +1,5 @@
 
-angular.module('timeclockApp.user')
-	.controller('timeclockApp.user.edit-controller', [
+module.exports = [
 	    '$scope',
 	    '$state',
 	    '$stateParams',
@@ -20,4 +19,4 @@ angular.module('timeclockApp.user')
 	    		});
 	    	}
 	    }
-	]);
+	];
