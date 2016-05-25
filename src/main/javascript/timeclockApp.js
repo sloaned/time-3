@@ -1,9 +1,11 @@
 
-angular.module('timeclockApp', [
-      'ui.router',
-      'timeclockApp.routes',
-      'timeclockApp.home',
-      'timeclockApp.user'
+var angular = require('angular');
+
+module.exports = angular.module('timeclockApp', [
+      require('angular-ui-router'),
+      require('./routes').name,
+      require('./home').name,
+      require('./user').name
     ])
 	.run(['$rootScope', '$state', '$stateParams', function ($rootScope, $state, $stateParams) {
 	    $rootScope.$state = $state;
@@ -14,15 +16,15 @@ angular.module('timeclockApp', [
 
 		$httpProvider.interceptors.push(['$q', '$rootScope', function($q, $rootScope) {
 			return {
-				'request' : function(config) {
+				request : function(config) {
 					$rootScope.error = null;
 					return config;
 				},
-				'response' : function(response) {
+				response : function(response) {
 					$rootScope.error = null;
 					return $q.when(response);
 				},
-				'responseError' : function(rejection) {
+				responseError : function(rejection) {
 					$rootScope.error = rejection;
 					return $q.reject(rejection);
 				}

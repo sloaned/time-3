@@ -1,6 +1,7 @@
 
+var angular = require('angular');
 
-angular.module('timeclockApp.routes', ['ui.router'])
+module.exports = angular.module('timeclockApp.routes', ['ui.router'])
 	.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
 		
 		$urlRouterProvider.otherwise('/');

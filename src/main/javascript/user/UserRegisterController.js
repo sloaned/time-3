@@ -1,6 +1,5 @@
 
-angular.module('timeclockApp.user')
-	.controller('timeclockApp.user.register-controller', [
+module.exports = [
 	    '$scope',
 	    '$state',
 	    'timeclockApp.user.service',
@@ -13,4 +12,4 @@ angular.module('timeclockApp.user')
 	    		});
 	    	}
 	    }
-	]);
+	];
