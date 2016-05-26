@@ -1,6 +1,6 @@
+var _ = require('lodash');
 
-angular.module('timeclockApp.user')
-	.factory('timeclockApp.user.service', ['timeclockApp.user.resource', function (userResource) {
+module.exports = ['timeclockApp.user.resource', function (userResource) {
 		return {
 			read: function (id) {
 				return userResource.get({id:id});
@@ -14,4 +14,4 @@ angular.module('timeclockApp.user')
 				return userResource.remove({id:id});
 			}
 		};
-	}]);
+	}];

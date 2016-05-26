@@ -1,0 +1,26 @@
+{
+  "name": "timeclock",
+  "version": "0.0.1",
+  "description": "[Jira Board](https://catalystit.atlassian.net/projects/TICKTOCK/summary)  \r [Confluence Page](https://catalystit.atlassian.net/wiki/display/CLK)",
+  "dependencies": {
+    "angular": "^1.5.5",
+    "angular-resource": "^1.5.5",
+    "angular-ui-router": "^0.3.0",
+    "bootstrap": "^3.3.6",
+    "lodash": "^4.13.1"
+  },
+  "devDependencies": {
+    "angular-mocks": "^1.5.5",
+    "jasmine": "^2.4.1",
+    "jasmine-core": "^2.4.1",
+    "karma": "^0.13.22",
+    "karma-jasmine": "^1.0.2",
+    "karma-phantomjs-launcher": "^1.0.0",
+    "phantomjs-prebuilt": "^2.1.7",
+    "webpack": "^1.13.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git.catalystitservices.com/mtidwell/TimeCardProject.git"
+  }
+}
