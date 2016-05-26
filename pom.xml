@@ -31,7 +31,7 @@
 			<artifactId>commons-lang3</artifactId>
 			<version>3.4</version>
 		</dependency>
-		
+
 
 		<!-- JSR-303 Validation -->
 		<dependency>
@@ -99,9 +99,9 @@
 		<dependency>
 			<groupId>com.fasterxml.jackson.datatype</groupId>
 			<artifactId>jackson-datatype-jsr310</artifactId>
-      <version>${jackson.version}</version>
+			<version>${jackson.version}</version>
 		</dependency>
-		
+
 
 		<!-- In Memory DB -->
 		<dependency>
@@ -133,10 +133,23 @@
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-all</artifactId>
 			<version>1.10.19</version>
+			<scope>test</scope>
+		</dependency>
+
+    <!-- Integration Testing -->
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+			<version>2.53.0</version>
       <scope>test</scope>
 		</dependency>
-		
-		
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>htmlunit-driver</artifactId>
+			<version>2.21</version>
+      <scope>test</scope>
+		</dependency>
+
 
 	</dependencies>
 
