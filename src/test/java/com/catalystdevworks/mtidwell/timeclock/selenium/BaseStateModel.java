@@ -152,23 +152,21 @@ public abstract class BaseStateModel {
 	 * <p>Currently will only log browser info if {@link Logger#isDebugEnabled()} is <code>true</code></p>
 	 */
 	public void logBrowserConsole() {
-		if (logger.isDebugEnabled()) {
-			logger.debug("Dumping Browser Logs: ");
-			for (LogEntry logEntry: webDriver.manage().logs().get(LogType.BROWSER)) {
-				browserLogger.log(
-					convert(logEntry.getLevel()),
-					String.format(
-						"%s - %s", 
-						BROWSER_TIMESTAMP_FORMATTER.format(
-							ZonedDateTime.ofInstant(
-								Instant.ofEpochMilli(logEntry.getTimestamp()),
-								ZoneId.systemDefault()
-							)
-						),
-						logEntry.getMessage()
-					)
-				);
-			}
+		logger.debug("Dumping Browser Logs: ");
+		for (LogEntry logEntry: webDriver.manage().logs().get(LogType.BROWSER)) {
+			browserLogger.log(
+				convert(logEntry.getLevel()),
+				String.format(
+					"%s - %s", 
+					BROWSER_TIMESTAMP_FORMATTER.format(
+						ZonedDateTime.ofInstant(
+							Instant.ofEpochMilli(logEntry.getTimestamp()),
+							ZoneId.systemDefault()
+						)
+					),
+					logEntry.getMessage()
+				)
+			);
 		}
 	}
 	
