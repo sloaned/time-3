@@ -15,7 +15,7 @@
 		<hsqldb.version>2.3.3</hsqldb.version>
 		<maven.tomcat.version>2.2</maven.tomcat.version>
 		<java.version>1.8</java.version>
-		
+
 		<npmVersion>2.15.1</npmVersion>
 		<nodeVersion>v4.4.4</nodeVersion>
 
@@ -139,55 +139,70 @@
 			<scope>test</scope>
 		</dependency>
 
-    <!-- Integration Testing -->
+		<!-- Integration Testing -->
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
 			<version>2.53.0</version>
-      <scope>test</scope>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>htmlunit-driver</artifactId>
 			<version>2.21</version>
-      <scope>test</scope>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-chrome-driver</artifactId>
+			<version>2.53.0</version>
+			<scope>test</scope>
 		</dependency>
 
-
 	</dependencies>
+
 
 	<profiles>
 		<profile>
 			<id>watch</id>
 			<build>
-			  <plugins>
+				<plugins>
 
-          <plugin>
-            <groupId>org.apache.tomcat.maven</groupId>
-            <artifactId>tomcat7-maven-plugin</artifactId>
-            <version>${maven.tomcat.version}</version>
-            <configuration>
-              <port>${maven.tomcat.port}</port>
-              <contextReloadable>true</contextReloadable>
-              <backgroundProcessorDelay>5</backgroundProcessorDelay>
-              <path>/</path>
-              <fork>true</fork>
-              <systemProperties>
-                <PORT>${maven.tomcat.port}</PORT>
-              </systemProperties>
-            </configuration>
-            <executions>
-              <execution>
-                <id>tomcat-run</id>
-                <phase>install</phase>
-                <goals>
-                  <goal>run</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-          
-          
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-failsafe-plugin</artifactId>
+						<configuration>
+							<skipTests>true</skipTests>
+						</configuration>
+					</plugin>
+
+					<plugin>
+						<groupId>org.apache.tomcat.maven</groupId>
+						<artifactId>tomcat7-maven-plugin</artifactId>
+						<configuration>
+							<contextReloadable>true</contextReloadable>
+							<backgroundProcessorDelay>5</backgroundProcessorDelay>
+						</configuration>
+						<executions>
+							<execution>
+								<id>it-tomcat-start</id>
+								<phase>none</phase>
+							</execution>
+							<execution>
+								<id>it-tomcat-stop</id>
+								<phase>none</phase>
+							</execution>
+							<execution>
+								<id>tomcat-run</id>
+								<phase>install</phase>
+								<goals>
+									<goal>run</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+
+
 					<plugin>
 						<groupId>com.fizzed</groupId>
 						<artifactId>fizzed-watcher-maven-plugin</artifactId>
@@ -203,57 +218,81 @@
 							</goals>
 						</configuration>
 						<executions>
-						  <execution>
-						    <id>start-watcher</id>
-						    <goals>
-						      <goal>run</goal>
-						    </goals>
-						    <phase>install</phase>
-						  </execution>
+							<execution>
+								<id>start-watcher</id>
+								<goals>
+									<goal>run</goal>
+								</goals>
+								<phase>install</phase>
+							</execution>
 						</executions>
 					</plugin>
-		      
-			  </plugins>
+
+				</plugins>
 			</build>
 		</profile>
 	</profiles>
 
 	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.tomcat.maven</groupId>
+					<artifactId>tomcat7-maven-plugin</artifactId>
+					<version>${maven.tomcat.version}</version>
+					<configuration>
+						<port>${maven.tomcat.port}</port>
+						<path>/</path>
+						<fork>true</fork>
+						<systemProperties>
+							<PORT>${maven.tomcat.port}</PORT>
+						</systemProperties>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.5.1</version>
+					<configuration>
+						<source>${java.version}</source>
+						<target>${java.version}</target>
+					</configuration>
+				</plugin>
+				<plugin>
+					<artifactId>maven-clean-plugin</artifactId>
+					<version>3.0.0</version>
+					<configuration>
+						<filesets>
+							<fileset>
+								<directory>${basedir}/src/main/webapp/js</directory>
+								<includes>
+									<include>**/*</include>
+								</includes>
+								<followSymlinks>false</followSymlinks>
+							</fileset>
+						</filesets>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-failsafe-plugin</artifactId>
+					<version>2.19.1</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
+
 		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.5.1</version>
-				<configuration>
-					<source>${java.version}</source>
-					<target>${java.version}</target>
-				</configuration>
-			</plugin>
-			
-			<plugin>
-        <artifactId>maven-clean-plugin</artifactId>
-        <version>3.0.0</version>
-				<configuration>
-					<filesets>
-						<fileset>
-							<directory>${basedir}/src/main/webapp/js</directory>
-							<includes>
-								<include>**/*</include>
-							</includes>
-							<followSymlinks>false</followSymlinks>
-						</fileset>
-					</filesets>
-				</configuration>
-      </plugin>
+
 
 			<plugin>
-        <groupId>com.github.eirslett</groupId>
-        <artifactId>frontend-maven-plugin</artifactId>
-        <version>1.0</version>
-        <configuration>
-          <installDirectory>${project.build.directory}</installDirectory>
-        </configuration>
-        <executions>
+				<groupId>com.github.eirslett</groupId>
+				<artifactId>frontend-maven-plugin</artifactId>
+				<version>1.0</version>
+				<configuration>
+					<installDirectory>${project.build.directory}</installDirectory>
+				</configuration>
+				<executions>
 					<execution>
 						<id>node install</id>
 						<goals>
@@ -268,21 +307,21 @@
 						</goals>
 						<phase>initialize</phase>
 						<configuration>
-              <arguments>install</arguments>
-            </configuration>
+							<arguments>install</arguments>
+						</configuration>
 					</execution>
-          <execution>
-            <id>webpack build</id>
-            <goals>
-              <goal>webpack</goal>
-            </goals>
-            <phase>process-sources</phase>
-            <configuration>
-              <arguments>-d</arguments>
-            </configuration>
-          </execution>
 					<execution>
-						<id>javascipt test</id>
+						<id>webpack build</id>
+						<goals>
+							<goal>webpack</goal>
+						</goals>
+						<phase>process-sources</phase>
+						<configuration>
+							<arguments>-d</arguments>
+						</configuration>
+					</execution>
+					<execution>
+						<id>javascript test</id>
 						<goals>
 							<goal>karma</goal>
 						</goals>
@@ -291,20 +330,52 @@
 							<karmaConfPath>${basedir}/karma.conf.js</karmaConfPath>
 						</configuration>
 					</execution>
-        </executions>
-      </plugin>
-      
-      
+				</executions>
+			</plugin>
+
+
 			<plugin>
 				<groupId>org.apache.tomcat.maven</groupId>
 				<artifactId>tomcat7-maven-plugin</artifactId>
-				<version>${maven.tomcat.version}</version>
 				<executions>
+					<execution>
+						<id>it-tomcat-start</id>
+						<phase>pre-integration-test</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>it-tomcat-stop</id>
+						<phase>post-integration-test</phase>
+						<goals>
+							<goal>shutdown</goal>
+						</goals>
+					</execution>
 					<execution>
 						<id>tomcat-shutdown</id>
 						<phase>clean</phase>
 						<goals>
 							<goal>shutdown</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<configuration>
+					<systemPropertyVariables>
+						<selenium.baseUrl>http://localhost:${maven.tomcat.port}/</selenium.baseUrl>
+						<webdriver.chrome.driver>C:\Tools\chromedriver_win32-2.21\chromedriver.exe</webdriver.chrome.driver>
+					</systemPropertyVariables>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>integration-test</goal>
+							<goal>verify</goal>
 						</goals>
 					</execution>
 				</executions>

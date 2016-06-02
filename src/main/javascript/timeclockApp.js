@@ -3,6 +3,7 @@ var angular = require('angular');
 
 module.exports = angular.module('timeclockApp', [
       require('angular-ui-router'),
+      require('./selenium').name,
       require('./routes').name,
       require('./home').name,
       require('./user').name
