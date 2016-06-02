@@ -12,6 +12,7 @@
     * Logging                          - log4j               - 1.2
     * Unit Testing                     - JUnit               - 4.12
     * Mocking                          - Mockito             - 1.10
+    * E2E Testing                      - Selenium            - 2.53
     
     * JavaScript Helper                - lodash              - 4.12
     * Browser Framework                - Angular             - 1.5
@@ -40,10 +41,13 @@ Press **[CTRL]+C** in the command line window to stop the server and watch.
 Another helpful command is to just run the unit tests.
 
     mvn clean test
+    
+To run all test, including E2E tests run the following command.
+
+    mvn clean install
 
 ## Setup : TODO ##
 1. Debug java instructions.
-2. Add [Selenium](http://www.seleniumhq.org/) e2e testing.
-3. [Optional] CSS pre-processor.
-4. [Optional] CSS packaging.
-5. [Optional] Links to technologies
+2. [Optional] CSS pre-processor.
+3. [Optional] CSS packaging.
+4. [Optional] Links to technologies
