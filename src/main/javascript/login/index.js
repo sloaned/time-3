@@ -2,9 +2,6 @@
 var angular = require('angular');
 
 module.exports = angular.module('timeclockApp.login', [require('angular-resource'), require('angular-ui-router')])
-	.factory('timeclockApp.user.resource', require('./UserResource'))
-	.factory('timeclockApp.user.service', require('./UserService'))
-	.controller('timeclockApp.user.edit-controller', require('./UserEditController'))
-	.controller('timeclockApp.user.list-controller', require('./UserListController'))
-	.controller('timeclockApp.user.profile-controller', require('./UserProfileController'))
-	.controller('timeclockApp.user.register-controller', require('./UserRegisterController'));
+	.factory('timeclockApp.user.resource', require('./LoginResource'))
+	.factory('timeclockApp.user.service', require('../user/UserService'))
+	.controller('timeclockApp.login.login-controller', require('./LoginController'));

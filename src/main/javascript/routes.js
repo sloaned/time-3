@@ -4,7 +4,7 @@ var angular = require('angular');
 module.exports = angular.module('timeclockApp.routes', ['ui.router'])
 	.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
 		
-		$urlRouterProvider.otherwise('/');
+		$urlRouterProvider.otherwise('/login');
 		
 		$stateProvider
 			.state('home', {

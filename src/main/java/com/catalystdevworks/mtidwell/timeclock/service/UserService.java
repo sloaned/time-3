@@ -30,6 +30,10 @@ public class UserService {
 		return userDAO.update(uuid, user);
 	}
 
+	public Boolean login(String username, String password) {
+		return userDAO.login(username, password);
+	}
+
 	public void delete(UUID uuid) {
 		userDAO.delete(uuid);
 	}

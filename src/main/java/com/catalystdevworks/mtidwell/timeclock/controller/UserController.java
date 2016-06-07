@@ -25,6 +25,11 @@ public class UserController {
 	public User create(@RequestBody User user) {
 		return userService.create(user);
 	}
+
+	@RequestMapping(value="/login", method=RequestMethod.GET)
+	public Boolean login(@RequestBody String username, @RequestBody String password) {
+		return userService.login(username, password);
+	}
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public List<User> read() {

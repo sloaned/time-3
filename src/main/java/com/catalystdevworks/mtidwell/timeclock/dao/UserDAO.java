@@ -33,6 +33,9 @@ public class UserDAO {
 	 * <strong>{@value}</strong>
 	 */
 	public static final String SELECT_ALL_USERS = "SELECT * FROM "+TABLE_NAME;
+
+
+	public static final String LOGIN_USER = "SELECT * FROM " + TABLE_NAME + " WHERE "+ User.COLUMN_USERNAME + "=:" + User.COLUMN_FIRST_NAME + " AND " + User.COLUMN_PASSWORD + "=:" +User.COLUMN_PASSWORD;
 	/**
 	 * <p>SQL to retrieve a single user from the User table by User id.</p>
 	 * 
@@ -71,6 +74,21 @@ public class UserDAO {
 	public List<User> read() {
 		logger.debug("Retrieving All Users");
 		return jdbcTemplate.query(SELECT_ALL_USERS, User.ROW_MAPPER);
+	}
+
+	public Boolean login(String username, String password) {
+		logger.debug("Trying to login");
+		MapSqlParameterSource source = new MapSqlParameterSource();
+		source.addValue(User.COLUMN_USERNAME, username);
+		source.addValue(User.COLUMN_PASSWORD, password);
+		User user = jdbcTemplate.queryForObject(LOGIN_USER, source, User.ROW_MAPPER);
+
+		System.out.println("user = " + user.toString());
+		logger.debug("user = " + user.toString());
+		if (user != null) {
+			return true;
+		}
+		return false;
 	}
 
 	public User read(UUID uuid) {
