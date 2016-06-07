@@ -1,7 +1,7 @@
 # Timeclock Project #
 
-[Jira Board](https://catalystit.atlassian.net/projects/TIME1/summary)  
-[Confluence Page](https://catalystit.atlassian.net/wiki/display/TIME1)
+[Jira Board](https://catalystit.atlassian.net/projects/TIME2/summary)  
+[Confluence Page](https://catalystit.atlassian.net/wiki/display/TIME2)
 
 ## Technologies ##
 
