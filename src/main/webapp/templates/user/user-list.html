@@ -14,9 +14,10 @@
 		  <ul class="list-group" ng-show="users.length > 0">
 		    <li class="list-group-item" ng-repeat="user in users">
 		      <div class="row row-vcenter">
-			      <span class="col-xs-4">{{user.fullName}}</span>
-			      <span class="col-xs-4 text-center">{{user.createdOn | date: 'yyyy-MM-dd HH:mm:ss Z'}}</span>
-			      <span class="col-xs-4 text-right"><a class="btn btn-primary" ui-sref="user-profile({userId:user.id})">View</a></span>
+			      <span class="col-xs-3">{{user.firstName}}</span>
+                  <span class="col-xs-3">{{user.lastName}}</span>
+			      <span class="col-xs-3 text-center">{{user.createdOn | date: 'yyyy-MM-dd HH:mm:ss Z'}}</span>
+			      <span class="col-xs-3 text-right"><a class="btn btn-primary" ui-sref="user-profile({userId:user.id})">View</a></span>
 			    </div>
 		    </li>
 		  </ul>
