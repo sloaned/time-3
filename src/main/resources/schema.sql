@@ -1,6 +1,11 @@
 CREATE TABLE User (
   id CHAR(36),
-  fullName VARCHAR(30) NOT NULL,
+  firstName VARCHAR(30) NOT NULL,
+  lastName VARCHAR(30) NOT NULL,
+  username VARCHAR(30) NOT NULL,
+  password VARCHAR(30) NOT NULL,
+  active BIT NOT NULL,
+  role VARCHAR(20) NOT NULL,
   createdOn VARCHAR(24) NOT NULL,
   birthday VARCHAR(10) DEFAULT NULL,
   PRIMARY KEY (id)

@@ -26,7 +26,7 @@ public class UserDAO {
 	 * 
 	 * <strong>{@value}</strong>
 	 */
-	public static final String INSERT_USER = "INSERT INTO "+TABLE_NAME+" ("+PRIMARY_KEY_NAME+", "+User.COLUMN_FULL_NAME+", "+User.COLUMN_CREATED_ON+", "+User.COLUMN_BIRTHDAY+") VALUES(:"+PRIMARY_KEY_NAME+", :"+User.COLUMN_FULL_NAME+", :"+User.COLUMN_CREATED_ON+", :"+User.COLUMN_BIRTHDAY+")";
+	public static final String INSERT_USER = "INSERT INTO "+TABLE_NAME+" ("+PRIMARY_KEY_NAME+", "+User.COLUMN_FIRST_NAME+", "+User.COLUMN_LAST_NAME+", "+User.COLUMN_USERNAME+", "+User.COLUMN_PASSWORD+", "+User.COLUMN_ACTIVE+", "+User.COLUMN_ROLE+", "+User.COLUMN_CREATED_ON+", "+User.COLUMN_BIRTHDAY+") VALUES(:"+PRIMARY_KEY_NAME+", :"+User.COLUMN_FIRST_NAME+", :"+User.COLUMN_LAST_NAME+", :"+User.COLUMN_USERNAME+", :"+User.COLUMN_PASSWORD+", :"+User.COLUMN_ACTIVE+", :"+User.COLUMN_ROLE+", :"+User.COLUMN_CREATED_ON+", :"+User.COLUMN_BIRTHDAY+")";
 	/**
 	 * <p>SQL to retrieve all users from the User table.</p>
 	 * 
@@ -44,7 +44,7 @@ public class UserDAO {
 	 * 
 	 * <strong>{@value}</strong>
 	 */
-	public static final String UPDATE_USER = "UPDATE "+TABLE_NAME+" SET "+PRIMARY_KEY_NAME+"=:"+PRIMARY_KEY_NAME+", "+User.COLUMN_FULL_NAME+"=:"+User.COLUMN_FULL_NAME+", "+User.COLUMN_CREATED_ON+"=:"+User.COLUMN_CREATED_ON+", "+User.COLUMN_BIRTHDAY+"=:"+User.COLUMN_BIRTHDAY+" WHERE "+PRIMARY_KEY_NAME+"=:oldId";
+	public static final String UPDATE_USER = "UPDATE "+TABLE_NAME+" SET "+PRIMARY_KEY_NAME+"=:"+PRIMARY_KEY_NAME+", "+User.COLUMN_FIRST_NAME+"=:"+User.COLUMN_FIRST_NAME+", "+User.COLUMN_LAST_NAME+"=:"+User.COLUMN_LAST_NAME+", "+User.COLUMN_USERNAME+"=:"+User.COLUMN_USERNAME+", "+User.COLUMN_PASSWORD+"=:"+User.COLUMN_PASSWORD+", "+User.COLUMN_ACTIVE+"=:"+User.COLUMN_ACTIVE+", "+User.COLUMN_ROLE+"=:"+User.COLUMN_ROLE+", "+User.COLUMN_CREATED_ON+"=:"+User.COLUMN_CREATED_ON+", "+User.COLUMN_BIRTHDAY+"=:"+User.COLUMN_BIRTHDAY+" WHERE "+PRIMARY_KEY_NAME+"=:oldId";
 	/**
 	 * <p>SQL to delete a user record from the database.</p>
 	 * 
@@ -58,7 +58,7 @@ public class UserDAO {
 	public User create(User user) {
 		user.setId(UUID.randomUUID());
 		user.setCreatedOn(ZonedDateTime.now(ZoneOffset.UTC));
-		
+		System.out.println("creating user " + user.toString());
 		if (logger.isDebugEnabled()) {
 			logger.debug("Creating User:\n"+user.toString());
 		}
