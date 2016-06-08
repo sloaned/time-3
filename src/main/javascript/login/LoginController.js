@@ -3,11 +3,12 @@
 module.exports = [
 	    '$scope',
 	    '$state',
-	    'timeclockApp.user.service',
+	    'timeclockApp.login.service',
 	    function ($scope, $state, userService) {
 	    	$scope.user = {};
 	    	$scope.username = "";
 	    	$scope.password = "";
+	    	$scope.credentials = {};
 
 	    	$scope.submit = function(user) {
 	    		userService.create(user).$promise.then(function (updatedUser) {
@@ -15,14 +16,19 @@ module.exports = [
 	    		});
 	    	};
 
-	    	$scope.login = function(username, password) {
-	    	    userService.login(username, password).$promise.then(function (response)) {
-	    	        if (response == true) {
+	    	$scope.login = function() {
+
+	    	    console.log("username = " + $scope.username + ", password = " + $scope.password);
+	    	    $scope.credentials.username = $scope.username;
+	    	    $scope.credentials.password = $scope.password;
+	    	    userService.login($scope.credentials).then(function (response) {
+	    	        console.log(response);
+	    	        if (response.data === true) {
 	    	            $state.go('user');
 	    	        } else {
 	    	            console.log("login failed");
 	    	        }
-	    	    }
+	    	    });
 	    	};
 	    }
 	];

@@ -12,6 +12,9 @@ module.exports = ['timeclockApp.login.resource', function (loginResource) {
 			},
 			remove: function (id) {
 				return loginResource.remove({id:id});
+			},
+			login: function (credentials) {
+			    return loginResource.login(credentials);
 			}
 		};
 	}];

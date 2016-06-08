@@ -35,7 +35,7 @@ public class UserDAO {
 	public static final String SELECT_ALL_USERS = "SELECT * FROM "+TABLE_NAME;
 
 
-	public static final String LOGIN_USER = "SELECT * FROM " + TABLE_NAME + " WHERE "+ User.COLUMN_USERNAME + "=:" + User.COLUMN_FIRST_NAME + " AND " + User.COLUMN_PASSWORD + "=:" +User.COLUMN_PASSWORD;
+	public static final String LOGIN_USER = "SELECT * FROM " + TABLE_NAME + " WHERE "+ User.COLUMN_USERNAME + "=:" + User.COLUMN_USERNAME + " AND " + User.COLUMN_PASSWORD + "=:" +User.COLUMN_PASSWORD;
 	/**
 	 * <p>SQL to retrieve a single user from the User table by User id.</p>
 	 * 
@@ -77,7 +77,7 @@ public class UserDAO {
 	}
 
 	public Boolean login(String username, String password) {
-		logger.debug("Trying to login");
+		logger.debug("Trying to login, username = " + username + ", password = " + password);
 		MapSqlParameterSource source = new MapSqlParameterSource();
 		source.addValue(User.COLUMN_USERNAME, username);
 		source.addValue(User.COLUMN_PASSWORD, password);

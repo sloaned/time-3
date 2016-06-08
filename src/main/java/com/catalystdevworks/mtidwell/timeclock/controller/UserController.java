@@ -1,8 +1,11 @@
 package com.catalystdevworks.mtidwell.timeclock.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
+import com.catalystdevworks.mtidwell.timeclock.entity.LoginCredentials;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,8 +29,10 @@ public class UserController {
 		return userService.create(user);
 	}
 
-	@RequestMapping(value="/login", method=RequestMethod.GET)
-	public Boolean login(@RequestBody String username, @RequestBody String password) {
+	@RequestMapping(value="/login", method=RequestMethod.POST)
+	public Boolean login(@RequestBody LoginCredentials credentials) {
+		String username = credentials.getUsername();
+		String password = credentials.getPassword();
 		return userService.login(username, password);
 	}
 	

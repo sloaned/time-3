@@ -1,12 +1,45 @@
 
+module.exports = ['$http', function ($http) {
+		return {
+		    login: function(credentials) {
+		        return $http.post('/api/user/login', credentials);
+		    }
 
-module.exports = ['$resource', function ($resource) {
-		return $resource('/api/user/:id', null, {
-			update: {
-				method: 'PUT',
+
+		};
+	}];
+
+
+		/*$resource('/api/user/login', null, {
+			login: {
+				method: 'GET',
 				params: {
-					id: '@oldId'
+					username: '@username',
+					password: '@password'
 				}
-			}
+			},
+
 		});
 	}];
+
+
+
+
+	angular.module('SpacedOut').factory('customerFactory', ['$http',
+       function($http) {
+        return {
+        	getAllCustomers: function(){
+        		return $http.get('/customer');
+        	},
+        	getCustomerById: function(id){
+        		return $http.get('/customer/' + id);
+        	},
+        	addCustomer: function(customer){
+        		return $http.post('/customer', customer);
+        	},
+        	updateCustomer: function(customer){
+        		return $http.put('/customer', customer);
+        	}
+
+        };
+    }]);*/

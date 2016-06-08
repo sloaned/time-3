@@ -37,22 +37,22 @@ public class User implements RowMapper<User>{
 	
 	private UUID id;
 
-	@NotNull(message="First name is required")
+	//@NotNull(message="First name is required")
 	private String firstName;
 
-	@NotNull(message="Last name is required")
+	//@NotNull(message="Last name is required")
 	private String lastName;
 
-	@NotNull(message="Username is required")
+	//@NotNull(message="Username is required")
 	private String username;
 
-	@NotNull(message="Password is required")
+	//@NotNull(message="Password is required")
 	private String password;
 
-	@NotNull(message="User must be active or inactive")
+	//@NotNull(message="User must be active or inactive")
 	private Boolean active;
 
-	@NotNull
+	//@NotNull
 	@Enumerated(value = EnumType.STRING)
 	private Role role;
 

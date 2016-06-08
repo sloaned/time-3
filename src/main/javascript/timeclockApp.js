@@ -3,10 +3,12 @@ var angular = require('angular');
 
 module.exports = angular.module('timeclockApp', [
       require('angular-ui-router'),
+      require('angular-resource'),
       require('./selenium').name,
       require('./routes').name,
       require('./home').name,
-      require('./user').name
+      require('./user').name,
+      require('./login').name
     ])
 	.run(['$rootScope', '$state', '$stateParams', function ($rootScope, $state, $stateParams) {
 	    $rootScope.$state = $state;
