@@ -2,15 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="481396ee-c3fd-410c-9324-0e8f9cfd0ec9" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/javascript/login/LoginController.js" afterPath="$PROJECT_DIR$/src/main/javascript/login/LoginController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/javascript/login/LoginResource.js" afterPath="$PROJECT_DIR$/src/main/javascript/login/LoginResource.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/javascript/login/LoginService.js" afterPath="$PROJECT_DIR$/src/main/javascript/login/LoginService.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/javascript/routes.js" afterPath="$PROJECT_DIR$/src/main/javascript/routes.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/javascript/timeclockApp.js" afterPath="$PROJECT_DIR$/src/main/javascript/timeclockApp.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/test-data.sql" afterPath="$PROJECT_DIR$/src/main/resources/test-data.sql" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/css/project.css" afterPath="$PROJECT_DIR$/src/main/webapp/css/project.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/templates/login/login.html" afterPath="$PROJECT_DIR$/src/main/webapp/templates/login/login.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/templates/user/user-register.html" afterPath="$PROJECT_DIR$/src/main/webapp/templates/user/user-register.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/javascript/register/RegisterController.js" afterPath="$PROJECT_DIR$/src/main/javascript/register/RegisterController.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/templates/register/register.html" afterPath="$PROJECT_DIR$/src/main/webapp/templates/register/register.html" />
     </list>
     <ignored path="timeclock.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -106,7 +99,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/javascript/register/RegisterController.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="20" column="28" selection-start-line="20" selection-start-column="28" selection-end-line="20" selection-end-column="28" />
+              <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -115,8 +108,8 @@
       <file leaf-file-name="register.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/templates/register/register.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.17741935">
-              <caret line="9" column="44" selection-start-line="9" selection-start-column="44" selection-end-line="9" selection-end-column="44" />
+            <state vertical-scroll-proportion="0.5125448">
+              <caret line="27" column="51" selection-start-line="27" selection-start-column="51" selection-end-line="27" selection-end-column="51" />
               <folding />
             </state>
           </provider>
@@ -1378,15 +1371,15 @@
     <entry file="file://$PROJECT_DIR$/src/main/javascript/register/RegisterController.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="20" column="28" selection-start-line="20" selection-start-column="28" selection-end-line="20" selection-end-column="28" />
+          <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/templates/register/register.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.17741935">
-          <caret line="9" column="44" selection-start-line="9" selection-start-column="44" selection-end-line="9" selection-end-column="44" />
+        <state vertical-scroll-proportion="0.5125448">
+          <caret line="27" column="51" selection-start-line="27" selection-start-column="51" selection-end-line="27" selection-end-column="51" />
           <folding />
         </state>
       </provider>
