@@ -34,6 +34,9 @@ public class User implements RowMapper<User>{
 	public static final String COLUMN_PASSWORD = "password";
 	public static final String COLUMN_ACTIVE = "active";
 	public static final String COLUMN_ROLE = "role";
+	public static final String COLUMN_EMAIL = "email";
+	public static final String COLUMN_ACCOUNT_LOCKED = "accountLocked";
+	public static final String COLUMN_FAILED_LOGIN_ATTEMPTS = "failedLoginAttempts";
 	
 	private UUID id;
 
@@ -49,6 +52,8 @@ public class User implements RowMapper<User>{
 	//@NotNull(message="Password is required")
 	private String password;
 
+	private String email;
+
 	//@NotNull(message="User must be active or inactive")
 	private Boolean active;
 
@@ -61,6 +66,10 @@ public class User implements RowMapper<User>{
 
 	@JsonFormat(shape=JsonFormat.Shape.STRING)
 	private LocalDate birthday;
+
+	private Boolean accountLocked;
+
+	private Integer failedLoginAttempts;
 	
 	@Override
 	public User mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -70,10 +79,13 @@ public class User implements RowMapper<User>{
 		user.setLastName(rs.getString(COLUMN_LAST_NAME));
 		user.setUsername(rs.getString(COLUMN_USERNAME));
 		user.setPassword(rs.getString(COLUMN_PASSWORD));
+		user.setEmail(rs.getString(COLUMN_EMAIL));
 		user.setActive(rs.getBoolean(COLUMN_ACTIVE));
 		user.setRole(Role.valueOf(rs.getString(COLUMN_ROLE)));
 		user.setBirthday(DateTimeFormatter.ISO_DATE.parse(rs.getString(COLUMN_BIRTHDAY), LocalDate::from));
 		user.setCreatedOn(DateTimeFormatter.ISO_DATE_TIME.parse(rs.getString(COLUMN_CREATED_ON), ZonedDateTime::from));
+		user.setAccountLocked(rs.getBoolean(COLUMN_ACCOUNT_LOCKED));
+		user.setFailedLoginAttempts((rs.getInt(COLUMN_FAILED_LOGIN_ATTEMPTS)));
 		
 		return user;
 	}
@@ -86,10 +98,13 @@ public class User implements RowMapper<User>{
 		sqlData.put(COLUMN_LAST_NAME, lastName);
 		sqlData.put(COLUMN_USERNAME, username);
 		sqlData.put(COLUMN_PASSWORD, password);
+		sqlData.put(COLUMN_EMAIL, email);
 		sqlData.put(COLUMN_ACTIVE, active);
 		sqlData.put(COLUMN_ROLE, role.toString());
 		sqlData.put(COLUMN_BIRTHDAY, DateTimeFormatter.ISO_DATE.format(birthday));
 		sqlData.put(COLUMN_CREATED_ON, DateTimeFormatter.ISO_DATE_TIME.format(createdOn.withZoneSameInstant(ZoneOffset.UTC)));
+		sqlData.put(COLUMN_ACCOUNT_LOCKED, accountLocked);
+		sqlData.put(COLUMN_FAILED_LOGIN_ATTEMPTS, failedLoginAttempts);
 		
 		return sqlData;
 	}
@@ -113,6 +128,8 @@ public class User implements RowMapper<User>{
 	public void setUsername(String username) { this.username = username; }
 	public String getPassword() { return password; }
 	public void setPassword(String password) { this.password = password; }
+	public String getEmail() { return email; }
+	public void setEmail(String email) { this.email = email; }
 	public Boolean isActive() { return active; }
 	public void setActive(Boolean active) { this.active = active; }
 	public Role getRole() { return role; }
@@ -130,4 +147,8 @@ public class User implements RowMapper<User>{
 	public void setBirthday(LocalDate birthday) {
 		this.birthday = birthday;
 	}
+	public Boolean isAccountLocked() { return accountLocked; }
+	public void setAccountLocked(Boolean accountLocked) { this.accountLocked = accountLocked; }
+	public Integer getFailedLoginAttempts() { return failedLoginAttempts; }
+	public void setFailedLoginAttempts(Integer failedLoginAttempts) { this.failedLoginAttempts = failedLoginAttempts; }
 }
