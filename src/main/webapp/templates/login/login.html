@@ -1,5 +1,5 @@
 <div>
-    <h1>Login</h1>
+    <h1>Login <button class="btn pull-right" ui-sref="register">Register an account</button></h1>
     <div class="form-group">
         <label for="user-username" class="col-xs-3">Username</label>
         <input type="text" id="user-username" class="form-control" ng-model="username" name="username"/>
@@ -11,5 +11,6 @@
     <hr />
     <div>
         <button class="btn btn-primary" type="submit" ng-click="login()">Log in</button>
+        <span class="error" ng-show="loginFailed" ng-model="loginFailMessage"></span>
     </div>
 </div>

@@ -8,7 +8,8 @@ module.exports = angular.module('timeclockApp', [
       require('./routes').name,
       require('./home').name,
       require('./user').name,
-      require('./login').name
+      require('./login').name,
+      require('./register').name
     ])
 	.run(['$rootScope', '$state', '$stateParams', function ($rootScope, $state, $stateParams) {
 	    $rootScope.$state = $state;

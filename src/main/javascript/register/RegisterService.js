@@ -1,4 +1,5 @@
 
+
 module.exports = ['timeclockApp.login.resource', function (loginResource) {
        		return {
        			read: function (id) {

@@ -18,6 +18,12 @@ module.exports = angular.module('timeclockApp.routes', ['ui.router'])
 			    templateUrl: '/templates/login/login.html',
 			    controller: 'timeclockApp.login.login-controller'
 			})
+
+			.state('register', {
+			    url: '/register',
+			    templateUrl: '/templates/register/register.html',
+			    controller: 'timeclockApp.register.register-controller'
+			})
 			
 			.state('user', {
 				url: '/user',

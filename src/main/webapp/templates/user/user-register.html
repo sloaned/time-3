@@ -1,8 +1,18 @@
 <div>
   <form name="userForm" ng-submit="submit(user)">
 	  <div class="form-group">
-	      <label for="user-fullName" class="col-xs-3">Full Name</label>
-	      <input type="text" id="user-fullName" class="form-control" ng-model="user.fullName" name="fullName"/>
+	      <label for="user-firstName" class="col-xs-3">First Name</label>
+	      <input type="text" id="user-firstName" class="form-control" ng-model="firstName" name="firstName"/>
+		  <label for="user-lastName" class="col-xs-3">Last Name</label>
+		  <input type="text" id="user-lastName" class="form-control" ng-model="lastName" name="lastName"/
+	  </div>
+	  <div class="form-group">
+		  <label for="user-username" class="col-xs-3">Desired Username</label>
+		  <input type="text" id="user-username" class="form-control" ng-model="userName" name="userName"/>
+	  </div>
+	  <div class="form-group">
+		  <label for="user-password" class="col-xs-3">Password</label>
+		  <input type="text" id="user-password" class="form-control" ng-model="password" name="password"/>
 	  </div>
 	  <div class="form-group">
 	      <label for="user-birthday" class="col-xs-3">Birthday</label>
@@ -11,7 +21,7 @@
     <hr />
 	  <div>
 	     <button class="btn btn-primary" type="submit">Submit</button>
-       <a class="btn btn-default" ui-sref="user">Cancel</a>
+       <a class="btn btn-default" ui-sref="user">Clear</a>
 	  </div>
   </form>
 </div>
