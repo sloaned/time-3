@@ -8,6 +8,7 @@ import java.util.UUID;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -76,19 +77,24 @@ public class UserDAO {
 		return jdbcTemplate.query(SELECT_ALL_USERS, User.ROW_MAPPER);
 	}
 
-	public Boolean login(String username, String password) {
+	public User login(String username, String password) {
 		logger.debug("Trying to login, username = " + username + ", password = " + password);
 		MapSqlParameterSource source = new MapSqlParameterSource();
 		source.addValue(User.COLUMN_USERNAME, username);
 		source.addValue(User.COLUMN_PASSWORD, password);
-		User user = jdbcTemplate.queryForObject(LOGIN_USER, source, User.ROW_MAPPER);
+		User user;
 
-		System.out.println("user = " + user.toString());
-		logger.debug("user = " + user.toString());
-		if (user != null) {
-			return true;
+		try {
+			user = jdbcTemplate.queryForObject(LOGIN_USER, source, User.ROW_MAPPER);
+		} catch (EmptyResultDataAccessException e) {
+			return null;
 		}
-		return false;
+
+		logger.debug("user = " + user.toString());
+
+		user.setPassword("");
+		return user;
+
 	}
 
 	public User read(UUID uuid) {

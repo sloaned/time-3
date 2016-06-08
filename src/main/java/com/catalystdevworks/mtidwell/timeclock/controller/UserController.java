@@ -30,7 +30,7 @@ public class UserController {
 	}
 
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public Boolean login(@RequestBody LoginCredentials credentials) {
+	public User login(@RequestBody LoginCredentials credentials) {
 		String username = credentials.getUsername();
 		String password = credentials.getPassword();
 		return userService.login(username, password);

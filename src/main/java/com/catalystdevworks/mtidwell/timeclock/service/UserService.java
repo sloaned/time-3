@@ -30,7 +30,7 @@ public class UserService {
 		return userDAO.update(uuid, user);
 	}
 
-	public Boolean login(String username, String password) {
+	public User login(String username, String password) {
 		return userDAO.login(username, password);
 	}
 
