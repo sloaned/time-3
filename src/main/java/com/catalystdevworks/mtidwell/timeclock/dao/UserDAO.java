@@ -1,5 +1,6 @@
 package com.catalystdevworks.mtidwell.timeclock.dao;
 
+import java.security.MessageDigest;
 import java.security.SecureRandom;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
@@ -7,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import com.catalystdevworks.mtidwell.timeclock.entity.Role;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -28,7 +30,7 @@ public class UserDAO {
 	 * 
 	 * <strong>{@value}</strong>
 	 */
-	public static final String INSERT_USER = "INSERT INTO "+TABLE_NAME+" ("+PRIMARY_KEY_NAME+", "+User.COLUMN_FIRST_NAME+", "+User.COLUMN_LAST_NAME+", "+User.COLUMN_USERNAME+", "+User.COLUMN_PASSWORD+", "+User.COLUMN_ACTIVE+", "+User.COLUMN_ROLE+", "+User.COLUMN_CREATED_ON+", "+User.COLUMN_BIRTHDAY+", "+User.COLUMN_EMAIL+ ", "+User.COLUMN_ACCOUNT_LOCKED+ ", "+User.COLUMN_FAILED_LOGIN_ATTEMPTS+ ", "+User.COLUMN_LOGIN_TOKEN+") VALUES(:"+PRIMARY_KEY_NAME+", :"+User.COLUMN_FIRST_NAME+", :"+User.COLUMN_LAST_NAME+", :"+User.COLUMN_USERNAME+", :"+User.COLUMN_PASSWORD+", :"+User.COLUMN_ACTIVE+", :"+User.COLUMN_ROLE+", :"+User.COLUMN_CREATED_ON+", :"+User.COLUMN_BIRTHDAY+", :"+User.COLUMN_EMAIL+", :"+User.COLUMN_ACCOUNT_LOCKED+", :"+User.COLUMN_FAILED_LOGIN_ATTEMPTS+", :"+User.COLUMN_LOGIN_TOKEN+")";
+	public static final String INSERT_USER = "INSERT INTO "+TABLE_NAME+" ("+PRIMARY_KEY_NAME+", "+User.COLUMN_FIRST_NAME+", "+User.COLUMN_LAST_NAME+", "+User.COLUMN_USERNAME+", "+User.COLUMN_PASSWORD+", "+User.COLUMN_ACTIVE+", "+User.COLUMN_ROLE+", "+User.COLUMN_CREATED_ON+", "+User.COLUMN_EMAIL+ ", "+User.COLUMN_ACCOUNT_LOCKED+ ", "+User.COLUMN_FAILED_LOGIN_ATTEMPTS+ ", "+User.COLUMN_LOGIN_TOKEN+") VALUES(:"+PRIMARY_KEY_NAME+", :"+User.COLUMN_FIRST_NAME+", :"+User.COLUMN_LAST_NAME+", :"+User.COLUMN_USERNAME+", :"+User.COLUMN_PASSWORD+", :"+User.COLUMN_ACTIVE+", :"+User.COLUMN_ROLE+", :"+User.COLUMN_CREATED_ON+", :"+User.COLUMN_EMAIL+", :"+User.COLUMN_ACCOUNT_LOCKED+", :"+User.COLUMN_FAILED_LOGIN_ATTEMPTS+", :"+User.COLUMN_LOGIN_TOKEN+")";
 	/**
 	 * <p>SQL to retrieve all users from the User table.</p>
 	 * 
@@ -55,7 +57,7 @@ public class UserDAO {
 	 * 
 	 * <strong>{@value}</strong>
 	 */
-	public static final String UPDATE_USER = "UPDATE "+TABLE_NAME+" SET "+PRIMARY_KEY_NAME+"=:"+PRIMARY_KEY_NAME+", "+User.COLUMN_FIRST_NAME+"=:"+User.COLUMN_FIRST_NAME+", "+User.COLUMN_LAST_NAME+"=:"+User.COLUMN_LAST_NAME+", "+User.COLUMN_USERNAME+"=:"+User.COLUMN_USERNAME+", "+User.COLUMN_PASSWORD+"=:"+User.COLUMN_PASSWORD+", "+User.COLUMN_ACTIVE+"=:"+User.COLUMN_ACTIVE+", "+User.COLUMN_ROLE+"=:"+User.COLUMN_ROLE+", "+User.COLUMN_CREATED_ON+"=:"+User.COLUMN_CREATED_ON+", "+User.COLUMN_BIRTHDAY+"=:"+User.COLUMN_BIRTHDAY+", "+User.COLUMN_EMAIL+"=:"+User.COLUMN_EMAIL+", "+User.COLUMN_ACCOUNT_LOCKED+"=:"+User.COLUMN_ACCOUNT_LOCKED+", "+User.COLUMN_FAILED_LOGIN_ATTEMPTS+"=:"+User.COLUMN_FAILED_LOGIN_ATTEMPTS+", "+User.COLUMN_LOGIN_TOKEN+"=:"+User.COLUMN_LOGIN_TOKEN+" WHERE "+PRIMARY_KEY_NAME+"=:oldId";
+	public static final String UPDATE_USER = "UPDATE "+TABLE_NAME+" SET "+PRIMARY_KEY_NAME+"=:"+PRIMARY_KEY_NAME+", "+User.COLUMN_FIRST_NAME+"=:"+User.COLUMN_FIRST_NAME+", "+User.COLUMN_LAST_NAME+"=:"+User.COLUMN_LAST_NAME+", "+User.COLUMN_USERNAME+"=:"+User.COLUMN_USERNAME+", "+User.COLUMN_PASSWORD+"=:"+User.COLUMN_PASSWORD+", "+User.COLUMN_ACTIVE+"=:"+User.COLUMN_ACTIVE+", "+User.COLUMN_ROLE+"=:"+User.COLUMN_ROLE+", "+User.COLUMN_CREATED_ON+"=:"+User.COLUMN_CREATED_ON+", "+User.COLUMN_EMAIL+"=:"+User.COLUMN_EMAIL+", "+User.COLUMN_ACCOUNT_LOCKED+"=:"+User.COLUMN_ACCOUNT_LOCKED+", "+User.COLUMN_FAILED_LOGIN_ATTEMPTS+"=:"+User.COLUMN_FAILED_LOGIN_ATTEMPTS+", "+User.COLUMN_LOGIN_TOKEN+"=:"+User.COLUMN_LOGIN_TOKEN+" WHERE "+PRIMARY_KEY_NAME+"=:oldId";
 	/**
 	 * <p>SQL to delete a user record from the database.</p>
 	 * 
@@ -69,12 +71,22 @@ public class UserDAO {
 	public User create(User user) {
 		user.setId(UUID.randomUUID());
 		user.setCreatedOn(ZonedDateTime.now(ZoneOffset.UTC));
+		user.setActive(true);
+		user.setRole(Role.USER);
+		user.setAccountLocked(false);
+		user.setFailedLoginAttempts(0);
 		System.out.println("creating user " + user.toString());
 		if (logger.isDebugEnabled()) {
 			logger.debug("Creating User:\n"+user.toString());
 		}
+
+		user.setPassword(sha256(user.getPassword()));
+
+		user.setLoginToken(generateToken());
 		
 		jdbcTemplate.update(INSERT_USER, new MapSqlParameterSource(user.toSQLMap()));
+
+		user.setPassword("");
 		
 		return user;
 	}
@@ -105,6 +117,7 @@ public class UserDAO {
 	public User login(String username, String password) {
 		logger.debug("Trying to login, username = " + username + ", password = " + password);
 		MapSqlParameterSource source = new MapSqlParameterSource();
+		password = sha256(password);
 		source.addValue(User.COLUMN_USERNAME, username);
 		source.addValue(User.COLUMN_PASSWORD, password);
 		User user;
@@ -117,21 +130,9 @@ public class UserDAO {
 
 		logger.debug("user = " + user.toString());
 
-		String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-		SecureRandom rnd = new SecureRandom();
-
-		int tokenLength = 30;
-		StringBuilder sb = new StringBuilder( tokenLength );
-		for( int i = 0; i < tokenLength; i++ ) {
-			sb.append(AB.charAt(rnd.nextInt(AB.length())));
-		}
-		String token = sb.toString();
-		user.setLoginToken(token);
+		user.setLoginToken(generateToken());
 
 		update(user.getId(), user);
-
-		User updatedUser = read(user.getId());
-		logger.debug("updated user = " + updatedUser.toString());
 
 		user.setPassword("");
 		return user;
@@ -149,11 +150,13 @@ public class UserDAO {
 		if (logger.isDebugEnabled()) {
 			logger.debug("Updating User: "+ uuid.toString() + "\n" + user.toString());
 		}
-		
+		user.setPassword(sha256(user.getPassword()));
 		Map<String, Object> parameters = user.toSQLMap();
 		parameters.put("oldId", uuid.toString());
 		
 		jdbcTemplate.update(UPDATE_USER, new MapSqlParameterSource(parameters));
+
+		user.setPassword("");
 		
 		return user;
 	}
@@ -163,6 +166,37 @@ public class UserDAO {
 			logger.debug("Deleting User: "+ uuid.toString());
 		}
 		jdbcTemplate.update(DELETE_USER, new MapSqlParameterSource(PRIMARY_KEY_NAME, uuid.toString()));
+	}
+
+	public String generateToken() {
+
+		String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+		SecureRandom rnd = new SecureRandom();
+
+		int tokenLength = 30;
+		StringBuilder sb = new StringBuilder( tokenLength );
+		for( int i = 0; i < tokenLength; i++ ) {
+			sb.append(AB.charAt(rnd.nextInt(AB.length())));
+		}
+		return sb.toString();
+	}
+
+	public String sha256(String base) {
+		try{
+			MessageDigest digest = MessageDigest.getInstance("SHA-256");
+			byte[] hash = digest.digest(base.getBytes("UTF-8"));
+			StringBuffer hexString = new StringBuffer();
+
+			for (int i = 0; i < hash.length; i++) {
+				String hex = Integer.toHexString(0xff & hash[i]);
+				if(hex.length() == 1) hexString.append('0');
+				hexString.append(hex);
+			}
+			logger.debug("hash result = " + hexString.toString());
+			return hexString.toString();
+		} catch(Exception ex){
+			throw new RuntimeException(ex);
+		}
 	}
 
 	public NamedParameterJdbcTemplate getJdbcTemplate() {

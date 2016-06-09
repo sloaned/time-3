@@ -13,6 +13,7 @@ module.exports = [
                 } else {
                     userService.readAll().then(function(response) {
                         console.log(response.data);
+                        $scope.users = response.data;
                     });
                 }
             });

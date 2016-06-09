@@ -30,14 +30,14 @@ public class UserTest {
 	private String testPassword = "password1";
 	private Boolean testActive = true;
 	private Role testRole = Role.USER;
-	private LocalDate testBirthday = LocalDate.of(2016, 01, 01);
+	//private LocalDate testBirthday = LocalDate.of(2016, 01, 01);
 	private ZonedDateTime testCreatedOn = ZonedDateTime.of(LocalDate.of(2016, 01, 01), LocalTime.of(0, 0, 0, 0), ZoneOffset.UTC);
 	
 	@Before
 	public void setup() throws Exception {
 		user = new User();
 		
-		user.setBirthday(testBirthday);
+		//user.setBirthday(testBirthday);
 		user.setCreatedOn(testCreatedOn);
 		user.setId(testId);
 		user.setFirstName(testFirstName);
@@ -56,7 +56,7 @@ public class UserTest {
 		when(mockResultSet.getBoolean(User.COLUMN_ACTIVE)).thenReturn(testActive);
 		when(mockResultSet.getString(User.COLUMN_ROLE)).thenReturn(testRole.toString());
 		when(mockResultSet.getString(User.COLUMN_CREATED_ON)).thenReturn(DateTimeFormatter.ISO_DATE_TIME.format(testCreatedOn.withZoneSameInstant(ZoneOffset.UTC)));
-		when(mockResultSet.getString(User.COLUMN_BIRTHDAY)).thenReturn(DateTimeFormatter.ISO_DATE.format(testBirthday));
+		//when(mockResultSet.getString(User.COLUMN_BIRTHDAY)).thenReturn(DateTimeFormatter.ISO_DATE.format(testBirthday));
 	}
 	
 	@Test
@@ -71,7 +71,7 @@ public class UserTest {
 		assertEquals("Active was not set in the map", testActive, actual.get(User.COLUMN_ACTIVE));
 		assertEquals("Role was not set in the map", testRole.toString(), (actual.get(User.COLUMN_ROLE)).toString());
 
-		assertEquals("Birthday was not set in the map.", DateTimeFormatter.ISO_DATE.format(testBirthday), actual.get(User.COLUMN_BIRTHDAY));
+		//assertEquals("Birthday was not set in the map.", DateTimeFormatter.ISO_DATE.format(testBirthday), actual.get(User.COLUMN_BIRTHDAY));
 		assertEquals("Id was not set in the map.", DateTimeFormatter.ISO_DATE_TIME.format(testCreatedOn.withZoneSameInstant(ZoneOffset.UTC)), actual.get(User.COLUMN_CREATED_ON));
 	}
 	
@@ -86,7 +86,7 @@ public class UserTest {
 		assertEquals("Password was not set in the user object", testPassword, actual.getPassword());
 		assertEquals("Active was not set in the user object", testActive, actual.isActive());
 		assertEquals("Role was not set in the user object", testRole, actual.getRole());
-		assertEquals("Birthday was not set in the user object.", testBirthday, actual.getBirthday());
+		//assertEquals("Birthday was not set in the user object.", testBirthday, actual.getBirthday());
 		assertEquals("Id was not set in the user object.", testCreatedOn, actual.getCreatedOn());
 	}
 	

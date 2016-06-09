@@ -28,8 +28,20 @@ module.exports = ['$resource', function ($resource) {
     		            }
     		        });
     		    },
-    		    readAll: function() {
+    		    getAll: function() {
     		        return $http.get('/api/user');
+    		    },
+    		    get: function(userId) {
+    		        return $http.get('/api/user/' + userId);
+    		    },
+    		    create: function(user) {
+    		        return $http.post('/api/user', user);
+    		    },
+    		    update: function(userId, user) {
+    		        return $http.put('/api/user/' + userId, user);
+    		    },
+    		    remove: function(userId) {
+    		        return $http.delete('/api/user/' + userId);
     		    }
     		};
     	}];

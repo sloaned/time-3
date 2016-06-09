@@ -1,16 +1,16 @@
 <div>
-    <h1>Register <button class="btn pull-right" ui-sref="login">Already registered? Login</button></h1>
+    <h1>Register <button class="btn pull-right" ui-sref="login">Cancel</button></h1>
     <h3>Fields with asterisks are required</h3>
     <form name="registrationForm" ng-submit="register()">
         <div class="form-group">
             <label for="user-username" class="col-xs-2">Desired Username *</label>
-            <span class="error" ng-show="usernameError" ng-model="usernameErrorMessage">* Username is required *</span>
+            <span class="error" ng-show="usernameError">{{ usernameErrorMessage }}</span>
             <input type="text" id="user-username" class="form-control" ng-change="checkUsername()" ng-model="username" name="username"/>
         </div>
         <div class="form-group">
             <label for="user-password" class="col-xs-2">Password *</label>
-            <span class="error" ng-show="passwordError" ng-model="passwordErrorMessage">* Password is required *</span>
-            <input type="password" id="user-password" class="form-control" ng-change="comparePasswords()" ng-model="password" name="password"/>
+            <span class="error" ng-show="passwordError">{{ passwordErrorMessage }}</span>
+            <input type="password" id="user-password" class="form-control" ng-change="checkPassword()" ng-model="password" name="password"/>
         </div>
         <div class="form-group">
             <label for="user-confirm-password" class="col-xs-2">Confirm Password *</label>
@@ -25,7 +25,7 @@
         </div>
         <div class="form-group">
             <label for="user-email" class="col-xs-2">Email *</label>
-            <span class="error" ng-show="emailError">* Email is required *</span>
+            <span class="error" ng-show="emailError">{{ emailErrorMessage }}</span>
             <input type="text" id="user-email" class="form-control" ng-model="email" name="password"/>
         </div>
         <hr />

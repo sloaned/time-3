@@ -22,6 +22,7 @@ module.exports = [
 	    	        if (response.data !== null && response.data !== "") {
 	    	            sessionStorage.userId = response.data.id;
 	    	            sessionStorage.loginToken = response.data.loginToken;
+	    	            sessionStorage.userRole = response.data.role;
 	    	            console.log(response.data);
 	    	            console.log("here's the id: ");
 	    	            console.log(response.data.id);

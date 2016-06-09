@@ -4,6 +4,7 @@ import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.UUID;
 
+import com.catalystdevworks.mtidwell.timeclock.entity.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +17,6 @@ public class UserService {
 	private UserDAO userDAO;
 
 	public User create(User user) {
-		ZonedDateTime time = ZonedDateTime.now();
-		user.setCreatedOn(time);
 		return userDAO.create(user);
 	}
 	
