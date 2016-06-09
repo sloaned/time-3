@@ -11,6 +11,6 @@
     <hr />
     <div>
         <button class="btn btn-primary" type="submit" ng-click="login()">Log in</button>
-        <span class="error" ng-show="loginFailed" ng-model="loginFailMessage"></span>
+        <span class="error" ng-show="loginFailed">{{ loginFailMessage }}</span>
     </div>
 </div>

@@ -39,8 +39,16 @@ public class UserDAO {
 	public static final String SELECT_ALL_USERS = "SELECT * FROM "+TABLE_NAME;
 
 
-
+	/**
+	 * SQL to retrieve a single user from the User table by user id and login token
+	 */
 	public static final String CHECK_USER_TOKEN = "SELECT * FROM " + TABLE_NAME + " WHERE "+ PRIMARY_KEY_NAME + "=:" + PRIMARY_KEY_NAME + " AND " + User.COLUMN_LOGIN_TOKEN + "=:" +User.COLUMN_LOGIN_TOKEN;
+
+	/**
+	 * SQL to retrieve a single user from the User table by username
+	 */
+	public static final String SELECT_USER_BY_USERNAME = "SELECT * FROM " + TABLE_NAME + " WHERE "+ User.COLUMN_USERNAME + "=:" + User.COLUMN_USERNAME;
+
 
 	/**
 	 * SQL to retrieve a single user from the User table by username and password
@@ -119,24 +127,57 @@ public class UserDAO {
 		MapSqlParameterSource source = new MapSqlParameterSource();
 		password = sha256(password);
 		source.addValue(User.COLUMN_USERNAME, username);
-		source.addValue(User.COLUMN_PASSWORD, password);
-		User user;
 
+		// user object to check if the username exists
+		User userByName;
 		try {
-			user = jdbcTemplate.queryForObject(LOGIN_USER, source, User.ROW_MAPPER);
+			userByName = jdbcTemplate.queryForObject(SELECT_USER_BY_USERNAME, source, User.ROW_MAPPER);
+			if (userByName.isAccountLocked() == true) {
+				// user's account is already locked
+				return AccountLockedUser();
+			}
+
+			source.addValue(User.COLUMN_PASSWORD, password);
+
+			// user object to check if the username and password match
+			User user;
+			try {
+				// successful login
+				user = jdbcTemplate.queryForObject(LOGIN_USER, source, User.ROW_MAPPER);
+
+				logger.debug("user = " + user.toString());
+
+				user.setLoginToken(generateToken());
+				user.setFailedLoginAttempts(0);
+
+				update(user.getId(), user);
+
+				user.setPassword("");
+				return user;
+			} catch (EmptyResultDataAccessException e) {
+				int failedLogins = userByName.getFailedLoginAttempts();
+				failedLogins += 1;
+				userByName.setFailedLoginAttempts(failedLogins);
+				// credentials were wrong for the third time, lock account
+				if (failedLogins >= 3) {
+					userByName.setAccountLocked(true);
+					update(userByName.getId(), userByName);
+					return AccountLockedUser();
+				}
+				// credentials were wrong, but there are fewer than 3 failed logins
+				update(userByName.getId(), userByName);
+				return null;
+			}
 		} catch (EmptyResultDataAccessException e) {
+			// the username does not exist in the database
 			return null;
 		}
+	}
 
-		logger.debug("user = " + user.toString());
-
-		user.setLoginToken(generateToken());
-
-		update(user.getId(), user);
-
-		user.setPassword("");
-		return user;
-
+	public User AccountLockedUser() {
+		User returnUser = new User();
+		returnUser.setAccountLocked(true);
+		return returnUser;
 	}
 
 	public User read(UUID uuid) {

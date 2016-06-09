@@ -139,8 +139,6 @@ module.exports = [
                 var valid = true;
                 if ($scope.username != null && $scope.username.length > 0) {
                     registerService.checkUsername($scope.username).then(function(response) {
-                        console.log("got this response");
-                        console.log(response.data);
                         if (response.data === true) {
                             $scope.usernameErrorMessage = "* This username is already registered *";
                             $scope.usernameError = true;
@@ -151,10 +149,8 @@ module.exports = [
                             valid = true;
                         }
 
-
                     });
                 } else {
-                    console.log("got the else");
                     $scope.usernameError = false;
                     valid = false;
                 }

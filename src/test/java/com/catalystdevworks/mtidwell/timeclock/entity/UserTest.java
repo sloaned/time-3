@@ -32,7 +32,11 @@ public class UserTest {
 	private Role testRole = Role.USER;
 	//private LocalDate testBirthday = LocalDate.of(2016, 01, 01);
 	private ZonedDateTime testCreatedOn = ZonedDateTime.of(LocalDate.of(2016, 01, 01), LocalTime.of(0, 0, 0, 0), ZoneOffset.UTC);
-	
+	private String testEmail = "test@gmail.com";
+	private Boolean testAccountLocked = false;
+	private Integer testFailedLoginAttempts = 0;
+
+
 	@Before
 	public void setup() throws Exception {
 		user = new User();
@@ -46,6 +50,9 @@ public class UserTest {
 		user.setPassword(testPassword);
 		user.setActive(testActive);
 		user.setRole(testRole);
+		user.setEmail(testEmail);
+		user.setAccountLocked(testAccountLocked);
+		user.setFailedLoginAttempts(testFailedLoginAttempts);
 		
 		mockResultSet = mock(ResultSet.class);
 		when(mockResultSet.getString(User.COLUMN_ID)).thenReturn(testId.toString());
@@ -57,6 +64,9 @@ public class UserTest {
 		when(mockResultSet.getString(User.COLUMN_ROLE)).thenReturn(testRole.toString());
 		when(mockResultSet.getString(User.COLUMN_CREATED_ON)).thenReturn(DateTimeFormatter.ISO_DATE_TIME.format(testCreatedOn.withZoneSameInstant(ZoneOffset.UTC)));
 		//when(mockResultSet.getString(User.COLUMN_BIRTHDAY)).thenReturn(DateTimeFormatter.ISO_DATE.format(testBirthday));
+		when(mockResultSet.getString(User.COLUMN_EMAIL)).thenReturn(testEmail);
+		when(mockResultSet.getBoolean(User.COLUMN_ACCOUNT_LOCKED)).thenReturn(testAccountLocked);
+		when(mockResultSet.getInt(User.COLUMN_FAILED_LOGIN_ATTEMPTS)).thenReturn(testFailedLoginAttempts);
 	}
 	
 	@Test
@@ -72,7 +82,11 @@ public class UserTest {
 		assertEquals("Role was not set in the map", testRole.toString(), (actual.get(User.COLUMN_ROLE)).toString());
 
 		//assertEquals("Birthday was not set in the map.", DateTimeFormatter.ISO_DATE.format(testBirthday), actual.get(User.COLUMN_BIRTHDAY));
-		assertEquals("Id was not set in the map.", DateTimeFormatter.ISO_DATE_TIME.format(testCreatedOn.withZoneSameInstant(ZoneOffset.UTC)), actual.get(User.COLUMN_CREATED_ON));
+		assertEquals("Created on date was not set in the map.", DateTimeFormatter.ISO_DATE_TIME.format(testCreatedOn.withZoneSameInstant(ZoneOffset.UTC)), actual.get(User.COLUMN_CREATED_ON));
+		assertEquals("Email was not set in the map.", testEmail, actual.get(User.COLUMN_EMAIL));
+		assertEquals("Account locked was not set in the map.", testAccountLocked, actual.get(User.COLUMN_ACCOUNT_LOCKED));
+		assertEquals("Failed login attempts was not set in the map.", testFailedLoginAttempts, actual.get(User.COLUMN_FAILED_LOGIN_ATTEMPTS));
+
 	}
 	
 	@Test
@@ -87,7 +101,10 @@ public class UserTest {
 		assertEquals("Active was not set in the user object", testActive, actual.isActive());
 		assertEquals("Role was not set in the user object", testRole, actual.getRole());
 		//assertEquals("Birthday was not set in the user object.", testBirthday, actual.getBirthday());
-		assertEquals("Id was not set in the user object.", testCreatedOn, actual.getCreatedOn());
+		assertEquals("Created on date was not set in the user object.", testCreatedOn, actual.getCreatedOn());
+		assertEquals("Email was not set in the user object.", testEmail, actual.getEmail());
+		assertEquals("Account locked was not set in the user object.", testAccountLocked, actual.isAccountLocked());
+		assertEquals("Failed login attempts was not set in the user object.", testFailedLoginAttempts, actual.getFailedLoginAttempts());
 	}
 	
 	@Test(expected=SQLException.class)
