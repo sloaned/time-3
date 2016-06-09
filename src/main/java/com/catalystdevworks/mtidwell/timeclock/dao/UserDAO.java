@@ -93,7 +93,6 @@ public class UserDAO {
 		user.setRole(Role.USER);
 		user.setAccountLocked(false);
 		user.setFailedLoginAttempts(0);
-		System.out.println("creating user " + user.toString());
 		if (logger.isDebugEnabled()) {
 			logger.debug("Creating User:\n"+user.toString());
 		}

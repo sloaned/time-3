@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="481396ee-c3fd-410c-9324-0e8f9cfd0ec9" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/catalystdevworks/mtidwell/timeclock/service/UsernameService.java" afterPath="$PROJECT_DIR$/src/main/java/com/catalystdevworks/mtidwell/timeclock/service/UsernameService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/schema.sql" afterPath="$PROJECT_DIR$/src/main/resources/schema.sql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/catalystdevworks/mtidwell/timeclock/dao/TimeclockDAO.java" afterPath="$PROJECT_DIR$/src/main/java/com/catalystdevworks/mtidwell/timeclock/dao/TimeclockDAO.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/catalystdevworks/mtidwell/timeclock/dao/UserDAO.java" afterPath="$PROJECT_DIR$/src/main/java/com/catalystdevworks/mtidwell/timeclock/dao/UserDAO.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/catalystdevworks/mtidwell/timeclock/service/TimeclockService.java" afterPath="$PROJECT_DIR$/src/main/java/com/catalystdevworks/mtidwell/timeclock/service/TimeclockService.java" />
     </list>
     <ignored path="timeclock.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -25,11 +26,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="UserDAO.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="UserDAO.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/catalystdevworks/mtidwell/timeclock/dao/UserDAO.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.93310463">
-              <caret line="31" column="65" selection-start-line="28" selection-start-column="4" selection-end-line="31" selection-end-column="65" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="217" column="80" selection-start-line="214" selection-start-column="8" selection-end-line="217" selection-end-column="80" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -128,7 +129,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/catalystdevworks/mtidwell/timeclock/service/TimeclockService.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="28" column="62" selection-start-line="28" selection-start-column="62" selection-end-line="28" selection-end-column="62" />
+              <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -136,13 +137,17 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TimeclockDAO.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="TimeclockDAO.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/catalystdevworks/mtidwell/timeclock/dao/TimeclockDAO.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="16" column="70" selection-start-line="16" selection-start-column="70" selection-end-line="16" selection-end-column="70" />
+            <state vertical-scroll-proportion="0.9125214">
+              <caret line="101" column="95" selection-start-line="101" selection-start-column="95" selection-end-line="101" selection-end-column="95" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#4109#4110#0" expanded="true" />
+                <element signature="e#4144#4145#0" expanded="true" />
+                <element signature="e#4220#4221#0" expanded="true" />
+                <element signature="e#4268#4269#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -182,7 +187,6 @@
         <option value="$PROJECT_DIR$/src/test/java/com/catalystdevworks/mtidwell/timeclock/entity/UserTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/catalystdevworks/mtidwell/timeclock/service/EmailService.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/catalystdevworks/mtidwell/timeclock/dao/UserDAO.java" />
         <option value="$PROJECT_DIR$/src/test/javascript/home/LoginController.spec.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/templates/login/login.html" />
         <option value="$PROJECT_DIR$/src/test/java/com/catalystdevworks/mtidwell/timeclock/selenium/model/LoginStateModel.java" />
@@ -216,8 +220,9 @@
         <option value="$PROJECT_DIR$/src/main/resources/schema.sql" />
         <option value="$PROJECT_DIR$/src/main/java/com/catalystdevworks/mtidwell/timeclock/entity/Timeclock.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/catalystdevworks/mtidwell/timeclock/controller/TimeclockController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/catalystdevworks/mtidwell/timeclock/service/TimeclockService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/catalystdevworks/mtidwell/timeclock/service/UsernameService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/catalystdevworks/mtidwell/timeclock/service/TimeclockService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/catalystdevworks/mtidwell/timeclock/dao/UserDAO.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/catalystdevworks/mtidwell/timeclock/dao/TimeclockDAO.java" />
       </list>
     </option>
@@ -1708,17 +1713,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/catalystdevworks/mtidwell/timeclock/service/TimeclockService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="28" column="62" selection-start-line="28" selection-start-column="62" selection-end-line="28" selection-end-column="62" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/catalystdevworks/mtidwell/timeclock/dao/TimeclockDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="16" column="70" selection-start-line="16" selection-start-column="70" selection-end-line="16" selection-end-column="70" />
+          <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1727,10 +1722,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/catalystdevworks/mtidwell/timeclock/dao/UserDAO.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.93310463">
-          <caret line="31" column="65" selection-start-line="28" selection-start-column="4" selection-end-line="31" selection-end-column="65" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="217" column="80" selection-start-line="214" selection-start-column="8" selection-end-line="217" selection-end-column="80" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/catalystdevworks/mtidwell/timeclock/dao/TimeclockDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.9125214">
+          <caret line="101" column="95" selection-start-line="101" selection-start-column="95" selection-end-line="101" selection-end-column="95" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4109#4110#0" expanded="true" />
+            <element signature="e#4144#4145#0" expanded="true" />
+            <element signature="e#4220#4221#0" expanded="true" />
+            <element signature="e#4268#4269#0" expanded="true" />
           </folding>
         </state>
       </provider>

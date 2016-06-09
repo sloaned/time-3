@@ -1,5 +1,6 @@
 package com.catalystdevworks.mtidwell.timeclock.service;
 
+import com.catalystdevworks.mtidwell.timeclock.dao.TimeclockDAO;
 import com.catalystdevworks.mtidwell.timeclock.entity.Timeclock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,4 +28,8 @@ public class TimeclockService {
     public Timeclock update(Integer id, Timeclock timeclock) { return timeclockDAO.update(id, timeclock); }
 
     public void delete(Integer id) { timeclockDAO.delete(id); }
+
+    public TimeclockDAO getTimeclockDAO() { return timeclockDAO; }
+
+    public void setTimeclockDAO(TimeclockDAO timeclockDAO) { this.timeclockDAO = timeclockDAO; }
 }
