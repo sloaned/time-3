@@ -14,5 +14,7 @@ public class UsernameService {
 
     public Boolean checkUsername(String username) { return usernameDAO.checkUsername(username); }
 
+    public UsernameDAO getUsernameDAO() { return usernameDAO; }
 
+    public void setUsernameDAO(UsernameDAO usernameDAO) { this.usernameDAO = usernameDAO; }
 }

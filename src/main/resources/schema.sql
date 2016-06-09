@@ -13,3 +13,9 @@ CREATE TABLE User (
   loginToken VARCHAR(30),
   PRIMARY KEY (id)
 );
+
+CREATE TABLE Timeclock (
+    userId CHAR(36) NOT NULL,
+    clockInTime INTEGER NOT NULL,
+    clockOutTime INTEGER,
+);
