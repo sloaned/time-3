@@ -6,7 +6,9 @@ import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.UUID;
+
 
 import com.catalystdevworks.mtidwell.timeclock.entity.Role;
 import org.apache.log4j.Logger;
@@ -17,6 +19,10 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.catalystdevworks.mtidwell.timeclock.entity.User;
+
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 @Repository
 public class UserDAO {
@@ -49,6 +55,10 @@ public class UserDAO {
 	 */
 	public static final String SELECT_USER_BY_USERNAME = "SELECT * FROM " + TABLE_NAME + " WHERE "+ User.COLUMN_USERNAME + "=:" + User.COLUMN_USERNAME;
 
+	/**
+	 * SQL to retrieve all admins from the User table
+	 */
+	public static final String SELECT_ADMINS = "SELECT * FROM " + TABLE_NAME + " WHERE "+ User.COLUMN_ROLE + "=:" + User.COLUMN_ROLE;
 
 	/**
 	 * SQL to retrieve a single user from the User table by username and password
@@ -162,6 +172,17 @@ public class UserDAO {
 				if (failedLogins >= 3) {
 					userByName.setAccountLocked(true);
 					update(userByName.getId(), userByName);
+
+					// send email to all admins to alert them of the locked account
+					MapSqlParameterSource adminSource = new MapSqlParameterSource();
+					adminSource.addValue(User.COLUMN_ROLE, Role.ADMIN.toString());
+					List<User> admins = jdbcTemplate.query(SELECT_ADMINS, adminSource, User.ROW_MAPPER);
+
+					for (User admin : admins) {
+
+						sendEmail(admin, userByName);
+					}
+
 					return AccountLockedUser();
 				}
 				// credentials were wrong, but there are fewer than 3 failed logins
@@ -238,6 +259,55 @@ public class UserDAO {
 		} catch(Exception ex){
 			throw new RuntimeException(ex);
 		}
+	}
+
+
+	public void sendEmail(User admin, User accountLockedUser) {
+		String to = admin.getEmail();
+		String from = "donotreply@timeclock.com";
+		Properties props = System.getProperties();
+		final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
+
+		// send email over gmail server
+		props.setProperty("mail.smtp.host", "smtp.gmail.com");
+
+		props.setProperty("mail.smtp.socketFactory.class", SSL_FACTORY);
+		props.setProperty("mail.smtp.socketFactory.fallback", "false");
+		props.setProperty("mail.smtp.port", "465");
+		props.setProperty("mail.smtp.socketFactory.port", "465");
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.debug", "true");
+		props.put("mail.store.protocol", "pop3");
+		props.put("mail.transport.protocol", "smtp");
+
+		// gmail account I set up for this project
+		final String username = "catalysttimeclocktest@gmail.com";//
+		final String password = "awesomepassword";
+		try{
+			Session session = Session.getDefaultInstance(props,
+				new Authenticator(){
+					protected PasswordAuthentication getPasswordAuthentication() {
+						return new PasswordAuthentication(username, password);
+					}
+			});
+
+			MimeMessage message = new MimeMessage(session);
+
+			message.setFrom(new InternetAddress(from));
+
+			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+
+			message.setSubject("Account lockout alert");
+
+			message.setText("The account " + accountLockedUser.getUsername() + " has been locked out from too many failed login attempts.");
+			logger.debug("about to try to send the email");
+			Transport.send(message);
+
+			logger.debug("email sent successfully");
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	public NamedParameterJdbcTemplate getJdbcTemplate() {
