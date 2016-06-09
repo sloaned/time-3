@@ -3,9 +3,8 @@
 module.exports = [
 	    '$scope',
 	    '$state',
-	    '$cacheFactory',
 	    'timeclockApp.register.service',
-	    function ($scope, $state, $cacheFactory, registerService) {
+	    function ($scope, $state, registerService) {
             $scope.firstName = "";
             $scope.lastName = "";
             $scope.username = "";
@@ -18,8 +17,6 @@ module.exports = [
             $scope.passwordError = false;
             $scope.passwordMatchError = false;
             $scope.emailError = false;
-
-
 
             $scope.user = {};
 

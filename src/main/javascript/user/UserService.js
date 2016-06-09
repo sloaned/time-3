@@ -22,6 +22,10 @@ module.exports = ['timeclockApp.user.resource', function (userResource) {
 			    console.log(userId);
 			    console.log(token);
 			    return userResource.loggedIn(userId, token);
+			}, logout: function() {
+			    sessionStorage.userId = "";
+			    sessionStorage.loginToken = "";
+			    sessionStorage.userRole = "";
 			}
 		};
 	}];

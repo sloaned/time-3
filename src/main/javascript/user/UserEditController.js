@@ -8,9 +8,12 @@ module.exports = [
 	        userService.loggedIn().then(function(response) {
                 console.log(response);
                 console.log(response.data);
+              //  var role = sessionStorage.userRole;
                 if (response.data != true) {
                     $state.go('login');
-                }
+                } /*else if(role != "ADMIN") {
+                    $state.go('timetracker');
+                } */
             });
 
 	    	$scope.user = userService.read($stateParams.userId);
@@ -26,5 +29,10 @@ module.exports = [
 	    			$state.go('user-profile', {userId:updatedUser.id});
 	    		});
 	    	}
+
+	    	$scope.logout = function() {
+	    	    userService.logout();
+	    	    $state.go('login');
+	    	};
 	    }
 	];

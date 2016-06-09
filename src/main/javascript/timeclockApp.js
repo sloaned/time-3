@@ -8,6 +8,7 @@ module.exports = angular.module('timeclockApp', [
       require('./routes').name,
       require('./home').name,
       require('./user').name,
+      require('./timetracker').name,
       require('./login').name,
       require('./register').name
     ])

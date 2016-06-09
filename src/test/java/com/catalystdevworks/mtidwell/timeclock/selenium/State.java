@@ -12,7 +12,11 @@ public enum State {
 	USER("user", "/user"),
 	USER_PROFILE("user-profile", "/user/profile/:userId"),
 	USER_PROFILE_EDIT("user-profile-edit", "/user/edit/:userId"),
-	USER_REGISTER("user-register", "/user/register");
+	USER_REGISTER("user-register", "/user/register"),
+	LOGIN("login", "/login"),
+	REGISTER("register", "/register"),
+	TIMETRACKER("timetracker", "/timetracker");
+
 	
 	private static final Pattern PATH_PARAMETER = Pattern.compile("/:([a-zA-Z]+)");
 	

@@ -10,8 +10,11 @@ module.exports = [
 	    	$scope.password = "";
 	    	$scope.credentials = {};
 	    	$scope.loginFailed = false;
+	    	$scope.registerButtonText = "Register an account";
+	    	$scope.loginFailMessage = "No message";
 
 	    	$scope.login = function() {
+	    	    clearPassword();
                 $scope.loginFailed = false;
 	    	    console.log("username = " + $scope.username + ", password = " + $scope.password);
 	    	    $scope.credentials.username = $scope.username;
@@ -29,19 +32,23 @@ module.exports = [
                             console.log(response.data);
                             console.log("here's the id: ");
                             console.log(response.data.id);
-                            $state.go('user');
+                            if (response.data.role == "ADMIN") {
+                                $state.go('user');
+                            } else {
+                                $state.go('timetracker');
+                            }
 	    	            }
 
 	    	        } else {
 	    	            console.log("login failed");
-	    	            $scope.loginFailMessage = "* Invalid credentials. *";
+	    	            $scope.loginFailMessage = "* Invalid credentials *";
 	    	            $scope.loginFailed = true;
 	    	        }
 	    	    });
 	    	};
 
-	    	var clearFields = function() {
-	    	    $scope.username = "";
+	    	var clearPassword = function() {
+	    	    //$scope.username = "";
                 $scope.password = "";
                 $scope.loginFailed = false;
 	    	};
