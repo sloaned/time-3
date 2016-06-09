@@ -37,6 +37,7 @@ public class User implements RowMapper<User>{
 	public static final String COLUMN_EMAIL = "email";
 	public static final String COLUMN_ACCOUNT_LOCKED = "accountLocked";
 	public static final String COLUMN_FAILED_LOGIN_ATTEMPTS = "failedLoginAttempts";
+	public static final String COLUMN_LOGIN_TOKEN = "loginToken";
 	
 	private UUID id;
 
@@ -70,6 +71,8 @@ public class User implements RowMapper<User>{
 	private Boolean accountLocked;
 
 	private Integer failedLoginAttempts;
+
+	private String loginToken;
 	
 	@Override
 	public User mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -86,6 +89,7 @@ public class User implements RowMapper<User>{
 		user.setCreatedOn(DateTimeFormatter.ISO_DATE_TIME.parse(rs.getString(COLUMN_CREATED_ON), ZonedDateTime::from));
 		user.setAccountLocked(rs.getBoolean(COLUMN_ACCOUNT_LOCKED));
 		user.setFailedLoginAttempts((rs.getInt(COLUMN_FAILED_LOGIN_ATTEMPTS)));
+		user.setLoginToken(rs.getString(COLUMN_LOGIN_TOKEN));
 		
 		return user;
 	}
@@ -105,6 +109,7 @@ public class User implements RowMapper<User>{
 		sqlData.put(COLUMN_CREATED_ON, DateTimeFormatter.ISO_DATE_TIME.format(createdOn.withZoneSameInstant(ZoneOffset.UTC)));
 		sqlData.put(COLUMN_ACCOUNT_LOCKED, accountLocked);
 		sqlData.put(COLUMN_FAILED_LOGIN_ATTEMPTS, failedLoginAttempts);
+		sqlData.put(COLUMN_LOGIN_TOKEN, loginToken);
 		
 		return sqlData;
 	}
@@ -151,4 +156,6 @@ public class User implements RowMapper<User>{
 	public void setAccountLocked(Boolean accountLocked) { this.accountLocked = accountLocked; }
 	public Integer getFailedLoginAttempts() { return failedLoginAttempts; }
 	public void setFailedLoginAttempts(Integer failedLoginAttempts) { this.failedLoginAttempts = failedLoginAttempts; }
+	public String getLoginToken() { return loginToken; }
+	public void setLoginToken(String loginToken) { this.loginToken = loginToken; }
 }

@@ -5,7 +5,7 @@ module.exports = [
 	    '$state',
 	    '$cacheFactory',
 	    'timeclockApp.register.service',
-	    function ($scope, $state, $cacheFactory, userService) {
+	    function ($scope, $state, $cacheFactory, registerService) {
             $scope.firstName = "";
             $scope.lastName = "";
             $scope.username = "";
@@ -27,6 +27,27 @@ module.exports = [
                 validateFields();
             }
 
+            $scope.checkUsername = function() {
+                if ($scope.username != null && $scope.username.length > 0) {
+                    registerService.checkUsername($scope.username).then(function(response) {
+                        console.log(response);
+                        if (response.data != null && response.data != "") {
+                            if (response.data === true) {
+                                $scope.usernameErrorMessage = "* This username is already registered *";
+                                $scope.usernameError = true;
+                            } else {
+                                console.log("getting to else");
+                                $scope.usernameError = false;
+                            }
+                        }
+                    });
+                }
+            };
+
+            $scope.comparePasswords = function() {
+                if ($scope.password === $scope.confirmPassword || $scope.confirmPassword === null || $scope.confirmPassword === "") { $scope.passwordMatchError = false; }
+                else { $scope.passwordMatchError = true; }
+            };
 
 
             $scope.clearFields = function() {

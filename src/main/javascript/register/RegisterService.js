@@ -1,12 +1,15 @@
 
 
-module.exports = ['timeclockApp.login.resource', function (loginResource) {
+module.exports = ['timeclockApp.register.resource', function (registerResource) {
        		return {
        			read: function (id) {
-       				return loginResource.get({id:id});
+       				return registerResource.get({id:id});
        			},
-       			login: function (credentials) {
-       			    return loginResource.login(credentials);
+       			register: function (user) {
+       			    return registerResource.register(user);
+       			},
+       			checkUsername: function (username) {
+       			    return  registerResource.checkUsername(username);
        			}
        		};
        	}];

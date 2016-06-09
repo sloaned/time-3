@@ -1,5 +1,6 @@
 package com.catalystdevworks.mtidwell.timeclock.dao;
 
+import java.security.SecureRandom;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.util.List;
@@ -36,6 +37,12 @@ public class UserDAO {
 	public static final String SELECT_ALL_USERS = "SELECT * FROM "+TABLE_NAME;
 
 
+
+	public static final String CHECK_USER_TOKEN = "SELECT * FROM " + TABLE_NAME + " WHERE "+ PRIMARY_KEY_NAME + "=:" + PRIMARY_KEY_NAME + " AND " + User.COLUMN_LOGIN_TOKEN + "=:" +User.COLUMN_LOGIN_TOKEN;
+
+	/**
+	 * SQL to retrieve a single user from the User table by username and password
+	 */
 	public static final String LOGIN_USER = "SELECT * FROM " + TABLE_NAME + " WHERE "+ User.COLUMN_USERNAME + "=:" + User.COLUMN_USERNAME + " AND " + User.COLUMN_PASSWORD + "=:" +User.COLUMN_PASSWORD;
 	/**
 	 * <p>SQL to retrieve a single user from the User table by User id.</p>
@@ -77,6 +84,24 @@ public class UserDAO {
 		return jdbcTemplate.query(SELECT_ALL_USERS, User.ROW_MAPPER);
 	}
 
+	public Boolean loggedIn(String userId, String token) {
+		MapSqlParameterSource source = new MapSqlParameterSource();
+		source.addValue(PRIMARY_KEY_NAME, userId);
+		//source.addValue(User.COLUMN_LOGIN_TOKEN, token);
+		User user;
+
+		logger.debug("in loggedIn, userId = " + userId + ", token = " + token);
+
+		try {
+			user = jdbcTemplate.queryForObject(SELECT_USER, source, User.ROW_MAPPER);
+			logger.debug("returning true");
+			return true;
+		} catch (EmptyResultDataAccessException e) {
+			logger.debug("returning false");
+			return false;
+		}
+	}
+
 	public User login(String username, String password) {
 		logger.debug("Trying to login, username = " + username + ", password = " + password);
 		MapSqlParameterSource source = new MapSqlParameterSource();
@@ -91,6 +116,20 @@ public class UserDAO {
 		}
 
 		logger.debug("user = " + user.toString());
+
+		String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+		SecureRandom rnd = new SecureRandom();
+
+		int tokenLength = 30;
+		StringBuilder sb = new StringBuilder( tokenLength );
+		for( int i = 0; i < tokenLength; i++ ) {
+			sb.append(AB.charAt(rnd.nextInt(AB.length())));
+		}
+		String token = sb.toString();
+		user.setLoginToken(token);
+
+		User updatedUser = read(user.getId());
+		logger.debug("updated user token = " + updatedUser.toString());
 
 		user.setPassword("");
 		return user;

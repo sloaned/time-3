@@ -1,5 +1,6 @@
 package com.catalystdevworks.mtidwell.timeclock.service;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -15,6 +16,8 @@ public class UserService {
 	private UserDAO userDAO;
 
 	public User create(User user) {
+		ZonedDateTime time = ZonedDateTime.now();
+		user.setCreatedOn(time);
 		return userDAO.create(user);
 	}
 	
@@ -37,6 +40,8 @@ public class UserService {
 	public void delete(UUID uuid) {
 		userDAO.delete(uuid);
 	}
+
+	public Boolean loggedIn(String userId, String token) { return userDAO.loggedIn(userId, token); }
 
 	public UserDAO getUserDAO() {
 		return userDAO;

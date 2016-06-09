@@ -11,5 +11,6 @@ CREATE TABLE User (
   birthday VARCHAR(10) DEFAULT NULL,
   accountLocked BIT NOT NULL,
   failedLoginAttempts INTEGER NOT NULL,
+  loginToken VARCHAR(50),
   PRIMARY KEY (id)
 );
