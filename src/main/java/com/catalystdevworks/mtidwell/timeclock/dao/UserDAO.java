@@ -28,7 +28,7 @@ public class UserDAO {
 	 * 
 	 * <strong>{@value}</strong>
 	 */
-	public static final String INSERT_USER = "INSERT INTO "+TABLE_NAME+" ("+PRIMARY_KEY_NAME+", "+User.COLUMN_FIRST_NAME+", "+User.COLUMN_LAST_NAME+", "+User.COLUMN_USERNAME+", "+User.COLUMN_PASSWORD+", "+User.COLUMN_ACTIVE+", "+User.COLUMN_ROLE+", "+User.COLUMN_CREATED_ON+", "+User.COLUMN_BIRTHDAY+") VALUES(:"+PRIMARY_KEY_NAME+", :"+User.COLUMN_FIRST_NAME+", :"+User.COLUMN_LAST_NAME+", :"+User.COLUMN_USERNAME+", :"+User.COLUMN_PASSWORD+", :"+User.COLUMN_ACTIVE+", :"+User.COLUMN_ROLE+", :"+User.COLUMN_CREATED_ON+", :"+User.COLUMN_BIRTHDAY+")";
+	public static final String INSERT_USER = "INSERT INTO "+TABLE_NAME+" ("+PRIMARY_KEY_NAME+", "+User.COLUMN_FIRST_NAME+", "+User.COLUMN_LAST_NAME+", "+User.COLUMN_USERNAME+", "+User.COLUMN_PASSWORD+", "+User.COLUMN_ACTIVE+", "+User.COLUMN_ROLE+", "+User.COLUMN_CREATED_ON+", "+User.COLUMN_BIRTHDAY+", "+User.COLUMN_EMAIL+ ", "+User.COLUMN_ACCOUNT_LOCKED+ ", "+User.COLUMN_FAILED_LOGIN_ATTEMPTS+ ", "+User.COLUMN_LOGIN_TOKEN+") VALUES(:"+PRIMARY_KEY_NAME+", :"+User.COLUMN_FIRST_NAME+", :"+User.COLUMN_LAST_NAME+", :"+User.COLUMN_USERNAME+", :"+User.COLUMN_PASSWORD+", :"+User.COLUMN_ACTIVE+", :"+User.COLUMN_ROLE+", :"+User.COLUMN_CREATED_ON+", :"+User.COLUMN_BIRTHDAY+", :"+User.COLUMN_EMAIL+", :"+User.COLUMN_ACCOUNT_LOCKED+", :"+User.COLUMN_FAILED_LOGIN_ATTEMPTS+", :"+User.COLUMN_LOGIN_TOKEN+")";
 	/**
 	 * <p>SQL to retrieve all users from the User table.</p>
 	 * 
@@ -55,7 +55,7 @@ public class UserDAO {
 	 * 
 	 * <strong>{@value}</strong>
 	 */
-	public static final String UPDATE_USER = "UPDATE "+TABLE_NAME+" SET "+PRIMARY_KEY_NAME+"=:"+PRIMARY_KEY_NAME+", "+User.COLUMN_FIRST_NAME+"=:"+User.COLUMN_FIRST_NAME+", "+User.COLUMN_LAST_NAME+"=:"+User.COLUMN_LAST_NAME+", "+User.COLUMN_USERNAME+"=:"+User.COLUMN_USERNAME+", "+User.COLUMN_PASSWORD+"=:"+User.COLUMN_PASSWORD+", "+User.COLUMN_ACTIVE+"=:"+User.COLUMN_ACTIVE+", "+User.COLUMN_ROLE+"=:"+User.COLUMN_ROLE+", "+User.COLUMN_CREATED_ON+"=:"+User.COLUMN_CREATED_ON+", "+User.COLUMN_BIRTHDAY+"=:"+User.COLUMN_BIRTHDAY+" WHERE "+PRIMARY_KEY_NAME+"=:oldId";
+	public static final String UPDATE_USER = "UPDATE "+TABLE_NAME+" SET "+PRIMARY_KEY_NAME+"=:"+PRIMARY_KEY_NAME+", "+User.COLUMN_FIRST_NAME+"=:"+User.COLUMN_FIRST_NAME+", "+User.COLUMN_LAST_NAME+"=:"+User.COLUMN_LAST_NAME+", "+User.COLUMN_USERNAME+"=:"+User.COLUMN_USERNAME+", "+User.COLUMN_PASSWORD+"=:"+User.COLUMN_PASSWORD+", "+User.COLUMN_ACTIVE+"=:"+User.COLUMN_ACTIVE+", "+User.COLUMN_ROLE+"=:"+User.COLUMN_ROLE+", "+User.COLUMN_CREATED_ON+"=:"+User.COLUMN_CREATED_ON+", "+User.COLUMN_BIRTHDAY+"=:"+User.COLUMN_BIRTHDAY+", "+User.COLUMN_EMAIL+"=:"+User.COLUMN_EMAIL+", "+User.COLUMN_ACCOUNT_LOCKED+"=:"+User.COLUMN_ACCOUNT_LOCKED+", "+User.COLUMN_FAILED_LOGIN_ATTEMPTS+"=:"+User.COLUMN_FAILED_LOGIN_ATTEMPTS+", "+User.COLUMN_LOGIN_TOKEN+"=:"+User.COLUMN_LOGIN_TOKEN+" WHERE "+PRIMARY_KEY_NAME+"=:oldId";
 	/**
 	 * <p>SQL to delete a user record from the database.</p>
 	 * 
@@ -87,13 +87,13 @@ public class UserDAO {
 	public Boolean loggedIn(String userId, String token) {
 		MapSqlParameterSource source = new MapSqlParameterSource();
 		source.addValue(PRIMARY_KEY_NAME, userId);
-		//source.addValue(User.COLUMN_LOGIN_TOKEN, token);
+		source.addValue(User.COLUMN_LOGIN_TOKEN, token);
 		User user;
 
 		logger.debug("in loggedIn, userId = " + userId + ", token = " + token);
 
 		try {
-			user = jdbcTemplate.queryForObject(SELECT_USER, source, User.ROW_MAPPER);
+			user = jdbcTemplate.queryForObject(CHECK_USER_TOKEN, source, User.ROW_MAPPER);
 			logger.debug("returning true");
 			return true;
 		} catch (EmptyResultDataAccessException e) {
@@ -128,8 +128,10 @@ public class UserDAO {
 		String token = sb.toString();
 		user.setLoginToken(token);
 
+		update(user.getId(), user);
+
 		User updatedUser = read(user.getId());
-		logger.debug("updated user token = " + updatedUser.toString());
+		logger.debug("updated user = " + updatedUser.toString());
 
 		user.setPassword("");
 		return user;

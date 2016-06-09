@@ -3,23 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="481396ee-c3fd-410c-9324-0e8f9cfd0ec9" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/catalystdevworks/mtidwell/timeclock/controller/UserController.java" afterPath="$PROJECT_DIR$/src/main/java/com/catalystdevworks/mtidwell/timeclock/controller/UserController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/catalystdevworks/mtidwell/timeclock/dao/UserDAO.java" afterPath="$PROJECT_DIR$/src/main/java/com/catalystdevworks/mtidwell/timeclock/dao/UserDAO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/catalystdevworks/mtidwell/timeclock/entity/User.java" afterPath="$PROJECT_DIR$/src/main/java/com/catalystdevworks/mtidwell/timeclock/entity/User.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/catalystdevworks/mtidwell/timeclock/service/UserService.java" afterPath="$PROJECT_DIR$/src/main/java/com/catalystdevworks/mtidwell/timeclock/service/UserService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/javascript/login/LoginController.js" afterPath="$PROJECT_DIR$/src/main/javascript/login/LoginController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/javascript/register/RegisterController.js" afterPath="$PROJECT_DIR$/src/main/javascript/register/RegisterController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/javascript/register/RegisterResource.js" afterPath="$PROJECT_DIR$/src/main/javascript/register/RegisterResource.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/javascript/register/RegisterService.js" afterPath="$PROJECT_DIR$/src/main/javascript/register/RegisterService.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/javascript/user/UserEditController.js" afterPath="$PROJECT_DIR$/src/main/javascript/user/UserEditController.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/javascript/user/UserListController.js" afterPath="$PROJECT_DIR$/src/main/javascript/user/UserListController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/javascript/user/UserProfileController.js" afterPath="$PROJECT_DIR$/src/main/javascript/user/UserProfileController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/javascript/user/UserRegisterController.js" afterPath="$PROJECT_DIR$/src/main/javascript/user/UserRegisterController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/javascript/user/UserResource.js" afterPath="$PROJECT_DIR$/src/main/javascript/user/UserResource.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/javascript/user/UserService.js" afterPath="$PROJECT_DIR$/src/main/javascript/user/UserService.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/schema.sql" afterPath="$PROJECT_DIR$/src/main/resources/schema.sql" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/test-data.sql" afterPath="$PROJECT_DIR$/src/main/resources/test-data.sql" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/templates/register/register.html" afterPath="$PROJECT_DIR$/src/main/webapp/templates/register/register.html" />
     </list>
     <ignored path="timeclock.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -41,11 +26,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="UserDAO.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="UserDAO.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/catalystdevworks/mtidwell/timeclock/dao/UserDAO.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7253142">
-              <caret line="131" column="69" selection-start-line="131" selection-start-column="69" selection-end-line="131" selection-end-column="69" />
+            <state vertical-scroll-proportion="16.962963">
+              <caret line="30" column="797" selection-start-line="30" selection-start-column="797" selection-end-line="30" selection-end-column="797" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="user-list.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/templates/user/user-list.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -65,7 +60,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/javascript/user/UserListController.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="7" column="12" selection-start-line="7" selection-start-column="12" selection-end-line="13" selection-end-column="15" />
+              <caret line="13" column="67" selection-start-line="13" selection-start-column="67" selection-end-line="13" selection-end-column="67" />
               <folding />
             </state>
           </provider>
@@ -81,16 +76,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UserController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/catalystdevworks/mtidwell/timeclock/controller/UserController.java">
+      <file leaf-file-name="UserResource.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/javascript/user/UserResource.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-19.37037">
-              <caret line="62" column="27" selection-start-line="62" selection-start-column="27" selection-end-line="62" selection-end-column="27" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1914#1915#0" expanded="true" />
-                <element signature="e#1939#1940#0" expanded="true" />
-              </folding>
+            <state vertical-scroll-proportion="0.7684391">
+              <caret line="32" column="17" selection-start-line="32" selection-start-column="17" selection-end-line="32" selection-end-column="17" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -109,30 +100,18 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/catalystdevworks/mtidwell/timeclock/entity/User.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="111" column="52" selection-start-line="111" selection-start-column="52" selection-end-line="111" selection-end-column="52" />
+              <caret line="41" column="20" selection-start-line="41" selection-start-column="20" selection-end-line="41" selection-end-column="20" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="schema.sql" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/schema.sql">
+      <file leaf-file-name="test-data.sql" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/test-data.sql">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+              <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UsernameController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/catalystdevworks/mtidwell/timeclock/controller/UsernameController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -186,7 +165,6 @@
         <option value="$PROJECT_DIR$/src/main/resources/schema.sql" />
         <option value="$PROJECT_DIR$/src/main/javascript/register/RegisterController.js" />
         <option value="$PROJECT_DIR$/src/main/java/com/catalystdevworks/mtidwell/timeclock/dao/UsernameDAO.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/test-data.sql" />
         <option value="$PROJECT_DIR$/src/main/java/com/catalystdevworks/mtidwell/timeclock/entity/LoginToken.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/catalystdevworks/mtidwell/timeclock/controller/LoginController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/catalystdevworks/mtidwell/timeclock/controller/UserController.java" />
@@ -194,11 +172,12 @@
         <option value="$PROJECT_DIR$/src/main/javascript/user/UserResource.js" />
         <option value="$PROJECT_DIR$/src/main/javascript/login/LoginController.js" />
         <option value="$PROJECT_DIR$/src/main/javascript/user/UserService.js" />
-        <option value="$PROJECT_DIR$/src/main/javascript/user/UserListController.js" />
         <option value="$PROJECT_DIR$/src/main/javascript/user/UserEditController.js" />
         <option value="$PROJECT_DIR$/src/main/javascript/user/UserProfileController.js" />
         <option value="$PROJECT_DIR$/src/main/javascript/user/UserRegisterController.js" />
         <option value="$PROJECT_DIR$/src/main/java/com/catalystdevworks/mtidwell/timeclock/dao/UserDAO.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/test-data.sql" />
+        <option value="$PROJECT_DIR$/src/main/javascript/user/UserListController.js" />
       </list>
     </option>
   </component>
@@ -321,6 +300,10 @@
               <option name="myItemId" value="templates" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="user" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -349,6 +332,32 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="register" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="timeclock" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="time-3" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -920,7 +929,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1358" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="1358" y="-8" width="1382" height="744" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1108,14 +1117,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/templates/user/user-list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/javascript/user/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1206,14 +1207,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/test-data.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="4" column="184" selection-start-line="4" selection-start-column="184" selection-end-line="4" selection-end-column="184" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/javascript/register/RegisterController.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1264,26 +1257,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/javascript/user/UserResource.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="32" column="17" selection-start-line="32" selection-start-column="17" selection-end-line="32" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/javascript/login/LoginController.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="25" column="55" selection-start-line="25" selection-start-column="55" selection-end-line="25" selection-end-column="55" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/catalystdevworks/mtidwell/timeclock/entity/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="111" column="52" selection-start-line="111" selection-start-column="52" selection-end-line="111" selection-end-column="52" />
           <folding />
         </state>
       </provider>
@@ -1293,9 +1270,9 @@
         <state vertical-scroll-proportion="-19.37037">
           <caret line="62" column="27" selection-start-line="62" selection-start-column="27" selection-end-line="62" selection-end-column="27" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1914#1915#0" expanded="true" />
-            <element signature="e#1939#1940#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#1914#1915#0" expanded="false" />
+            <element signature="e#1939#1940#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1326,23 +1303,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/javascript/user/UserService.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="22" column="60" selection-start-line="22" selection-start-column="60" selection-end-line="22" selection-end-column="60" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/javascript/user/UserEditController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="12" selection-start-line="7" selection-start-column="12" selection-end-line="13" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/javascript/user/UserListController.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="7" column="12" selection-start-line="7" selection-start-column="12" selection-end-line="13" selection-end-column="15" />
@@ -1366,10 +1327,58 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/catalystdevworks/mtidwell/timeclock/entity/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="41" column="20" selection-start-line="41" selection-start-column="20" selection-end-line="41" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/test-data.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/templates/user/user-list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/catalystdevworks/mtidwell/timeclock/dao/UserDAO.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7253142">
-          <caret line="131" column="69" selection-start-line="131" selection-start-column="69" selection-end-line="131" selection-end-column="69" />
+        <state vertical-scroll-proportion="16.962963">
+          <caret line="30" column="797" selection-start-line="30" selection-start-column="797" selection-end-line="30" selection-end-column="797" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/javascript/user/UserListController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="13" column="67" selection-start-line="13" selection-start-column="67" selection-end-line="13" selection-end-column="67" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/javascript/user/UserService.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="22" column="60" selection-start-line="22" selection-start-column="60" selection-end-line="22" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/javascript/user/UserResource.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7684391">
+          <caret line="32" column="17" selection-start-line="32" selection-start-column="17" selection-end-line="32" selection-end-column="17" />
           <folding />
         </state>
       </provider>

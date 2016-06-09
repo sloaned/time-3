@@ -10,10 +10,13 @@ module.exports = [
                 console.log(response.data);
                 if (response.data != true) {
                     $state.go('login');
+                } else {
+                    userService.readAll().then(function(response) {
+                        console.log(response.data);
+                    });
                 }
             });
 
 
-	    	$scope.users = userService.readAll();
 	    }
 	];
