@@ -14,7 +14,7 @@ public class RegisterStateModel extends BaseStateModel {
 
     @Override
     protected void findStateWebElements(State state) {
-        clearButton = webDriver.findElement(By.id("clearButtonText"));
+        clearButton = webDriver.findElement(By.id("clearButton"));
     }
 
     public WebElement getClearButton() {

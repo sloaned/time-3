@@ -126,16 +126,16 @@ public class UserDAO {
 
 		try {
 			user = jdbcTemplate.queryForObject(CHECK_USER_TOKEN, source, User.ROW_MAPPER);
-			logger.debug("returning true");
+			logger.debug("user is logged in, loggedIn returning true");
 			return true;
 		} catch (EmptyResultDataAccessException e) {
-			logger.debug("returning false");
+			logger.debug("user not found by username/token combination, loggedIn returning false");
 			return false;
 		}
 	}
 
 	public User login(String username, String password) {
-		logger.debug("Trying to login, username = " + username + ", password = " + password);
+		logger.debug("Trying to login, username = " + username);
 		MapSqlParameterSource source = new MapSqlParameterSource();
 		password = DigestUtils.sha256Hex(password);
 		source.addValue(User.COLUMN_USERNAME, username);
@@ -144,7 +144,7 @@ public class UserDAO {
 		User userByName;
 		try {
 			userByName = jdbcTemplate.queryForObject(SELECT_USER_BY_USERNAME, source, User.ROW_MAPPER);
-			if (userByName.isAccountLocked() == true) {
+			if (userByName.isAccountLocked()) {
 				// user's account is already locked
 				return createAccountLockedUser();
 			}
@@ -156,8 +156,6 @@ public class UserDAO {
 			try {
 				// successful login
 				user = jdbcTemplate.queryForObject(LOGIN_USER, source, User.ROW_MAPPER);
-
-				logger.debug("user = " + user.toString());
 
 				user.setLoginToken(RandomStringUtils.randomAlphanumeric(TOKEN_LENGTH));
 				user.setFailedLoginAttempts(0);
@@ -199,9 +197,9 @@ public class UserDAO {
 	}
 
 	public User createAccountLockedUser() {
-		User returnUser = new User();
-		returnUser.setAccountLocked(true);
-		return returnUser;
+		User lockedUser = new User();
+		lockedUser.setAccountLocked(true);
+		return lockedUser;
 	}
 
 	public User read(UUID uuid) {
@@ -232,38 +230,6 @@ public class UserDAO {
 		}
 		jdbcTemplate.update(DELETE_USER, new MapSqlParameterSource(PRIMARY_KEY_NAME, uuid.toString()));
 	}
-/*
-	public String generateToken() {
-		RandomStringUtils.randomAlphanumeric(30);
-		String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-		SecureRandom rnd = new SecureRandom();
-
-		int tokenLength = 30;
-		StringBuilder sb = new StringBuilder( tokenLength );
-		for( int i = 0; i < tokenLength; i++ ) {
-			sb.append(AB.charAt(rnd.nextInt(AB.length())));
-		}
-		return sb.toString();
-	}  */
-/*
-	public String sha256(String base) {
-		try{
-			MessageDigest digest = MessageDigest.getInstance("SHA-256");
-			byte[] hash = digest.digest(base.getBytes("UTF-8"));
-			StringBuffer hexString = new StringBuffer();
-
-			for (int i = 0; i < hash.length; i++) {
-				String hex = Integer.toHexString(0xff & hash[i]);
-				if(hex.length() == 1) hexString.append('0');
-				hexString.append(hex);
-			}
-			logger.debug("hash result = " + hexString.toString());
-			return hexString.toString();
-		} catch(Exception ex){
-			throw new RuntimeException(ex);
-		}
-	}
-*/
 
 	public void sendEmail(User admin, User accountLockedUser) {
 		String to = admin.getEmail();

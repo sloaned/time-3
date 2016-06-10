@@ -23,11 +23,11 @@ public class RegisterStateIT extends ShellState<RegisterStateModel> {
     public RegisterStateModel createStateModel() {
         return new RegisterStateModel();
     }
-/*
+
     @Test
     public void testClearButtonTextIsDisplayed() {
         String clearButtonText = model.getClearButton().getText();
 
         assertEquals("Expected clear button text to match.", "Clear", clearButtonText);
-    }  */
+    }
 }

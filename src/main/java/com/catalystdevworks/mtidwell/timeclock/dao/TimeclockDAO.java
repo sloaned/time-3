@@ -66,7 +66,7 @@ public class TimeclockDAO {
     public Timeclock create(Timeclock timeclock) {
 
         if (logger.isDebugEnabled()) {
-            logger.debug("Creating User:\n"+timeclock.toString());
+            logger.debug("Creating Timeclock:\n"+timeclock.toString());
         }
         jdbcTemplate.update(INSERT_TIMECLOCK, new MapSqlParameterSource(timeclock.toSQLMap()));
 

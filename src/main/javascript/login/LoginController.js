@@ -20,6 +20,7 @@ module.exports = [
             $scope.credentials.username = $scope.username;
             $scope.credentials.password = $scope.password;
             loginService.login($scope.credentials).then(function (response) {
+                console.log("here's the response from login");
                 console.log(response.data);
                 if (response.data !== null && response.data !== "") {
                     if (response.data.accountLocked == true) {

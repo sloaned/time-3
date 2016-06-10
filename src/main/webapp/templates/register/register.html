@@ -29,12 +29,12 @@
         <div class="form-group">
             <label for="user-email" class="col-xs-2">Email *</label>
             <span class="error" ng-show="emailError">{{ emailErrorMessage }}</span>
-            <input type="text" id="user-email" class="form-control" ng-model="user.email" name="password"/>
+            <input type="email" id="user-email" class="form-control" ng-model="user.email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" name="email"/>
         </div>
         <hr />
         <div>
             <button class="btn btn-primary" type="submit">Submit</button>
-            <button class="btn btn-default" ng-click="clearFields()">Clear</button>
+            <button class="btn btn-default" type="reset" id="clearButton" ng-click="clearErrors()">{{ clearButtonText }}</button>
         </div>
     </form>
 </div>

@@ -8,10 +8,16 @@ import java.util.UUID;
 import com.catalystdevworks.mtidwell.timeclock.entity.LoginCredentials;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
 
 import com.catalystdevworks.mtidwell.timeclock.entity.User;
 import com.catalystdevworks.mtidwell.timeclock.service.UserService;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 @RestController
 @RequestMapping("/user")
@@ -19,7 +25,7 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
-	@RequestMapping(method=RequestMethod.POST)
+	@RequestMapping(method= RequestMethod.POST)
 	public User create(@RequestBody User user) {
 		return userService.create(user);
 	}

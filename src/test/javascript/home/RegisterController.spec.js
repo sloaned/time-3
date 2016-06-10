@@ -17,9 +17,9 @@ describe('RegisterController', function() {
 		// create controller before each test
 		controller = $controller('timeclockApp.register.register-controller', { $scope: $scope });
 	}));
-    /*
+
 	it('Has value set to $scope.clearButtonText', function() {
 		expect($scope.clearButtonText).toEqual('Clear');
-	});  */
+	});
 
 });

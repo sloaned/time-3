@@ -9,7 +9,7 @@ module.exports = [
                 console.log(response.data);
                 var role = sessionStorage.userRole;
                 console.log(role);
-                if (response.data != true) {
+                if (!response.data) {
                     $state.go('login');
                 } /*else if(role != "ADMIN") {
                     $state.go('timetracker');
