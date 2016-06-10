@@ -1,16 +1,19 @@
 <div>
-    <h1>Register <button class="btn pull-right" ui-sref="login">Cancel</button></h1>
+    <span>
+        <h1 style="display:inline;">Register</h1>
+        <button class="btn pull-right" ui-sref="login">Cancel</button>
+    </span>
     <h4>Fields with asterisks are required</h4>
     <form name="registrationForm" ng-submit="register()">
         <div class="form-group">
             <label for="user-username" class="col-xs-2">Desired Username *</label>
             <span class="error" ng-show="usernameError">{{ usernameErrorMessage }}</span>
-            <input type="text" id="user-username" class="form-control" ng-change="checkUsername()" ng-model="username" name="username"/>
+            <input type="text" id="user-username" class="form-control" ng-change="checkUsername()" ng-model="user.username" name="username"/>
         </div>
         <div class="form-group">
             <label for="user-password" class="col-xs-2">Password *</label>
             <span class="error" ng-show="passwordError">{{ passwordErrorMessage }}</span>
-            <input type="password" id="user-password" class="form-control" ng-change="checkPassword()" ng-model="password" name="password"/>
+            <input type="password" id="user-password" class="form-control" ng-change="checkPassword()" ng-model="user.password" name="password"/>
         </div>
         <div class="form-group">
             <label for="user-confirm-password" class="col-xs-2">Confirm Password *</label>
@@ -19,14 +22,14 @@
         </div>
         <div class="form-group">
             <label for="user-firstName" class="col-xs-2">First Name</label>
-            <input type="text" id="user-firstName" class="form-control" ng-model="firstName" name="firstName"/>
+            <input type="text" id="user-firstName" class="form-control" ng-model="user.firstName" name="firstName"/>
             <label for="user-lastName" class="col-xs-2">Last Name</label>
-            <input type="text" id="user-lastName" class="form-control" ng-model="lastName" name="lastName"/>
+            <input type="text" id="user-lastName" class="form-control" ng-model="user.lastName" name="lastName"/>
         </div>
         <div class="form-group">
             <label for="user-email" class="col-xs-2">Email *</label>
             <span class="error" ng-show="emailError">{{ emailErrorMessage }}</span>
-            <input type="text" id="user-email" class="form-control" ng-model="email" name="password"/>
+            <input type="text" id="user-email" class="form-control" ng-model="user.email" name="password"/>
         </div>
         <hr />
         <div>

@@ -1,16 +1,20 @@
 <div>
-    <h1>Login <button class="btn pull-right" id="registerButton" ui-sref="register">{{ registerButtonText }}</button></h1>
-    <div class="form-group">
-        <label for="user-username" class="col-xs-3">Username</label>
-        <input type="text" id="user-username" class="form-control" ng-model="username" name="username"/>
-    </div>
-    <div class="form-group">
-        <label for="user-password" class="col-xs-3">Password</label>
-        <input type="password" id="user-password" class="form-control" ng-model="password" name="password"/>
-    </div>
-    <hr />
-    <div>
-        <button class="btn btn-primary" type="submit" ng-click="login()">Log in</button>
-        <span class="error" ng-show="loginFailed">{{ loginFailMessage }}</span>
-    </div>
+    <span><h1 style="display:inline;">Login</h1><button class="btn pull-right" id="registerButton" ui-sref="register">{{ registerButtonText }}</button></span>
+    <br><br><br>
+    <form name="loginForm" ng-submit="login()">
+        <div class="form-group">
+            <label for="user-username" class="col-xs-3">Username</label>
+            <input type="text" id="user-username" class="form-control" ng-model="username" name="username"/>
+        </div>
+        <div class="form-group">
+            <label for="user-password" class="col-xs-3">Password</label>
+            <input type="password" id="user-password" class="form-control" ng-model="password" name="password"/>
+        </div>
+        <hr />
+        <div>
+            <button class="btn btn-primary" type="submit">Log in</button>
+            <span class="error" ng-show="loginFailed">{{ loginFailMessage }}</span>
+        </div>
+    </form>
+
 </div>

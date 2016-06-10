@@ -11,6 +11,8 @@ import java.util.UUID;
 
 
 import com.catalystdevworks.mtidwell.timeclock.entity.Role;
+import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -26,6 +28,7 @@ import javax.mail.internet.MimeMessage;
 
 @Repository
 public class UserDAO {
+	private final int TOKEN_LENGTH = 30;
 	private static final Logger logger = Logger.getLogger(UserDAO.class);
 	
 	public static final String TABLE_NAME = "User";
@@ -97,9 +100,9 @@ public class UserDAO {
 			logger.debug("Creating User:\n"+user.toString());
 		}
 
-		user.setPassword(sha256(user.getPassword()));
+		user.setPassword(DigestUtils.sha256Hex(user.getPassword()));
 
-		user.setLoginToken(generateToken());
+		user.setLoginToken(RandomStringUtils.randomAlphanumeric(TOKEN_LENGTH));
 		
 		jdbcTemplate.update(INSERT_USER, new MapSqlParameterSource(user.toSQLMap()));
 
@@ -134,7 +137,7 @@ public class UserDAO {
 	public User login(String username, String password) {
 		logger.debug("Trying to login, username = " + username + ", password = " + password);
 		MapSqlParameterSource source = new MapSqlParameterSource();
-		password = sha256(password);
+		password = DigestUtils.sha256Hex(password);
 		source.addValue(User.COLUMN_USERNAME, username);
 
 		// user object to check if the username exists
@@ -143,7 +146,7 @@ public class UserDAO {
 			userByName = jdbcTemplate.queryForObject(SELECT_USER_BY_USERNAME, source, User.ROW_MAPPER);
 			if (userByName.isAccountLocked() == true) {
 				// user's account is already locked
-				return AccountLockedUser();
+				return createAccountLockedUser();
 			}
 
 			source.addValue(User.COLUMN_PASSWORD, password);
@@ -156,7 +159,7 @@ public class UserDAO {
 
 				logger.debug("user = " + user.toString());
 
-				user.setLoginToken(generateToken());
+				user.setLoginToken(RandomStringUtils.randomAlphanumeric(TOKEN_LENGTH));
 				user.setFailedLoginAttempts(0);
 
 				update(user.getId(), user);
@@ -164,10 +167,11 @@ public class UserDAO {
 				user.setPassword("");
 				return user;
 			} catch (EmptyResultDataAccessException e) {
+				// unsuccessful login, increment failedLogins
 				int failedLogins = userByName.getFailedLoginAttempts();
 				failedLogins += 1;
 				userByName.setFailedLoginAttempts(failedLogins);
-				// credentials were wrong for the third time, lock account
+				// if credentials were wrong for the third time, lock account
 				if (failedLogins >= 3) {
 					userByName.setAccountLocked(true);
 					update(userByName.getId(), userByName);
@@ -182,7 +186,7 @@ public class UserDAO {
 						sendEmail(admin, userByName);
 					}
 
-					return AccountLockedUser();
+					return createAccountLockedUser();
 				}
 				// credentials were wrong, but there are fewer than 3 failed logins
 				update(userByName.getId(), userByName);
@@ -194,7 +198,7 @@ public class UserDAO {
 		}
 	}
 
-	public User AccountLockedUser() {
+	public User createAccountLockedUser() {
 		User returnUser = new User();
 		returnUser.setAccountLocked(true);
 		return returnUser;
@@ -211,7 +215,7 @@ public class UserDAO {
 		if (logger.isDebugEnabled()) {
 			logger.debug("Updating User: "+ uuid.toString() + "\n" + user.toString());
 		}
-		user.setPassword(sha256(user.getPassword()));
+		user.setPassword(DigestUtils.sha256Hex(user.getPassword()));
 		Map<String, Object> parameters = user.toSQLMap();
 		parameters.put("oldId", uuid.toString());
 		
@@ -228,9 +232,9 @@ public class UserDAO {
 		}
 		jdbcTemplate.update(DELETE_USER, new MapSqlParameterSource(PRIMARY_KEY_NAME, uuid.toString()));
 	}
-
+/*
 	public String generateToken() {
-
+		RandomStringUtils.randomAlphanumeric(30);
 		String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 		SecureRandom rnd = new SecureRandom();
 
@@ -240,8 +244,8 @@ public class UserDAO {
 			sb.append(AB.charAt(rnd.nextInt(AB.length())));
 		}
 		return sb.toString();
-	}
-
+	}  */
+/*
 	public String sha256(String base) {
 		try{
 			MessageDigest digest = MessageDigest.getInstance("SHA-256");
@@ -259,7 +263,7 @@ public class UserDAO {
 			throw new RuntimeException(ex);
 		}
 	}
-
+*/
 
 	public void sendEmail(User admin, User accountLockedUser) {
 		String to = admin.getEmail();
@@ -298,13 +302,13 @@ public class UserDAO {
 
 			message.setSubject("Account lockout alert");
 
-			message.setText("The account " + accountLockedUser.getUsername() + " has been locked out from too many failed login attempts.");
+			message.setText("The account " + accountLockedUser.getUsername() + " has been locked out for having too many failed login attempts.");
 			logger.debug("about to try to send the email");
 			Transport.send(message);
 
 			logger.debug("email sent successfully");
 		} catch (MessagingException e) {
-			e.printStackTrace();
+			logger.error("Email failed to send", e);
 		}
 
 	}

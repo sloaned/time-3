@@ -26,7 +26,6 @@ public class User implements RowMapper<User>{
 	public static final RowMapper<User> ROW_MAPPER = new User();
 	
 	public static final String COLUMN_ID = "id";
-	//public static final String COLUMN_BIRTHDAY = "birthday";
 	public static final String COLUMN_CREATED_ON = "createdOn";
 	public static final String COLUMN_FIRST_NAME = "firstName";
 	public static final String COLUMN_LAST_NAME = "lastName";
@@ -41,32 +40,23 @@ public class User implements RowMapper<User>{
 	
 	private UUID id;
 
-	//@NotNull(message="First name is required")
 	private String firstName;
 
-	//@NotNull(message="Last name is required")
 	private String lastName;
 
-	//@NotNull(message="Username is required")
 	private String username;
 
-	//@NotNull(message="Password is required")
 	private String password;
 
 	private String email;
 
-	//@NotNull(message="User must be active or inactive")
 	private Boolean active;
 
-	//@NotNull
 	@Enumerated(value = EnumType.STRING)
 	private Role role;
 
 	@JsonFormat(shape=JsonFormat.Shape.STRING)
 	private ZonedDateTime createdOn;
-
-	//@JsonFormat(shape=JsonFormat.Shape.STRING)
-	//private LocalDate birthday;
 
 	private Boolean accountLocked;
 
@@ -85,7 +75,6 @@ public class User implements RowMapper<User>{
 		user.setEmail(rs.getString(COLUMN_EMAIL));
 		user.setActive(rs.getBoolean(COLUMN_ACTIVE));
 		user.setRole(Role.valueOf(rs.getString(COLUMN_ROLE)));
-		//user.setBirthday(DateTimeFormatter.ISO_DATE.parse(rs.getString(COLUMN_BIRTHDAY), LocalDate::from));
 		user.setCreatedOn(DateTimeFormatter.ISO_DATE_TIME.parse(rs.getString(COLUMN_CREATED_ON), ZonedDateTime::from));
 		user.setAccountLocked(rs.getBoolean(COLUMN_ACCOUNT_LOCKED));
 		user.setFailedLoginAttempts((rs.getInt(COLUMN_FAILED_LOGIN_ATTEMPTS)));
@@ -105,7 +94,6 @@ public class User implements RowMapper<User>{
 		sqlData.put(COLUMN_EMAIL, email);
 		sqlData.put(COLUMN_ACTIVE, active);
 		sqlData.put(COLUMN_ROLE, role.toString());
-		//sqlData.put(COLUMN_BIRTHDAY, DateTimeFormatter.ISO_DATE.format(birthday));
 		sqlData.put(COLUMN_CREATED_ON, DateTimeFormatter.ISO_DATE_TIME.format(createdOn.withZoneSameInstant(ZoneOffset.UTC)));
 		sqlData.put(COLUMN_ACCOUNT_LOCKED, accountLocked);
 		sqlData.put(COLUMN_FAILED_LOGIN_ATTEMPTS, failedLoginAttempts);
@@ -146,12 +134,6 @@ public class User implements RowMapper<User>{
 	public void setCreatedOn(ZonedDateTime createdOn) {
 		this.createdOn = createdOn;
 	}
-	/*public LocalDate getBirthday() {
-		return birthday;
-	}
-	public void setBirthday(LocalDate birthday) {
-		this.birthday = birthday;
-	} */
 	public Boolean isAccountLocked() { return accountLocked; }
 	public void setAccountLocked(Boolean accountLocked) { this.accountLocked = accountLocked; }
 	public Integer getFailedLoginAttempts() { return failedLoginAttempts; }

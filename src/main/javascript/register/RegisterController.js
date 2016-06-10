@@ -5,12 +5,8 @@ module.exports = [
 	    '$state',
 	    'timeclockApp.register.service',
 	    function ($scope, $state, registerService) {
-            $scope.firstName = "";
-            $scope.lastName = "";
-            $scope.username = "";
-            $scope.password = "";
+
             $scope.confirmPassword = "";
-            $scope.email = "";
             $scope.firstNameError = false;
             $scope.lastNameError = false;
             $scope.usernameError = false;
@@ -23,11 +19,6 @@ module.exports = [
             $scope.register = function() {
 
                if (validateFields()) {
-                    $scope.user.firstName = $scope.firstName;
-                    $scope.user.lastName = $scope.lastName;
-                    $scope.user.username = $scope.username;
-                    $scope.user.password = $scope.password;
-                    $scope.user.email = $scope.email;
 
                     registerService.register($scope.user).then(function(response) {
                         console.log(response.data);
@@ -46,13 +37,12 @@ module.exports = [
 
             $scope.clearFields = function() {
                 console.log("clear button clicked!");
-                $scope.firstName = "";
-                $scope.lastName = "";
-                $scope.username = "";
-                $scope.password = "";
+                $scope.user.firstName = "";
+                $scope.user.lastName = "";
+                $scope.user.username = "";
+                $scope.user.password = "";
                 $scope.confirmPassword = "";
-                $scope.email = "";
-                $scope.birthday = "";
+                $scope.user.email = "";
                 $scope.firstNameError = false;
                 $scope.lastNameError = false;
                 $scope.usernameError = false;
@@ -65,15 +55,14 @@ module.exports = [
             var validateFields = function() {
                 var valid = true;
 
-                if ($scope.username === null || $scope.username.length === 0) {
+                if ($scope.user.username === null || $scope.user.username.length === 0) {
                     $scope.usernameErrorMessage = "* Username is required *";
                     $scope.usernameError = true;
                     valid = false;
                 } else if (!$scope.checkUsername()) {
                     valid = false;
                 } else { $scope.usernameError = false; }
-                console.log("after checking username, valid = " + valid);
-                if ($scope.password === null || $scope.password.length === 0) {
+                if ($scope.user.password === null || $scope.user.password.length === 0) {
                     $scope.passwordErrorMessage = "* Password is required *";
                     $scope.passwordError = true;
                     valid = false;
@@ -81,32 +70,27 @@ module.exports = [
                     valid = false;
                 }
                 else { $scope.passwordError = false; }
-                if ($scope.confirmPassword === null || $scope.confirmPassword != $scope.password) {
+                if ($scope.confirmPassword === null || $scope.confirmPassword != $scope.user.password) {
                     $scope.passwordMatchError = true;
                     valid = false;
                 }
                 else { $scope.passwordMatchError = false; }
-                if ($scope.email === null || $scope.email.length === 0 || !$scope.validateEmail($scope.email)) {
+                if ($scope.user.email === null || $scope.user.email.length === 0 || !$scope.validateEmail($scope.email)) {
                     $scope.emailErrorMessage = "* Valid email is required *";
                     $scope.emailError = true;
                     valid = false;
                 }
                 else { $scope.emailError = false; }
 
-                console.log("valid = " + valid);
-
                 return valid;
             };
 
 
             $scope.checkUsername = function() {
-                console.log("checking username");
-                if (validateUsername($scope.username)) {
+                if (validateUsername($scope.user.username)) {
                     var valid = checkUsernameInDatabase();
-                    console.log("response from checkUsernameInDatabase = " + valid);
                     return valid;
                 } else {
-                    console("failed validateUsername");
                     $scope.usernameErrorMessage = "* Username may only contain alphanumeric characters, dashes, and underscores *";
                     $scope.usernameError = true;
                     return false;
@@ -131,11 +115,9 @@ module.exports = [
             };
 
             var checkUsernameInDatabase = function() {
-                console.log("checking the username in the database: ");;
-                console.log($scope.username);
                 var valid = true;
-                if ($scope.username != null && $scope.username.length > 0) {
-                    registerService.checkUsername($scope.username).then(function(response) {
+                if ($scope.user.username != null && $scope.user.username.length > 0) {
+                    registerService.checkUsername($scope.user.username).then(function(response) {
                         if (response.data === true) {
                             $scope.usernameErrorMessage = "* This username is already registered *";
                             $scope.usernameError = true;
@@ -161,17 +143,7 @@ module.exports = [
                 var lowercase = /[a-z]+/;
                 var number = /[0-9]+/;
                 var special = /[!@#$%^&*()_+\-=\[\]{};:\\|,.<>\/?]+/;
-            /*
-                console.log("uppercase test:");
-                console.log(uppercase.test(password));
-                console.log("lowercase test:");
-                console.log(lowercase.test(password));
 
-                console.log("number test:");
-                console.log(number.test(password));
-                console.log("special test:");
-                console.log(special.test(password));
-            */
                 if (uppercase.test(password) && lowercase.test(password) && number.test(password) && special.test(password)) {
                     $scope.passwordError = false;
                     return true;
@@ -184,7 +156,7 @@ module.exports = [
             };
 
             $scope.comparePasswords = function() {
-                if ($scope.password === $scope.confirmPassword || $scope.confirmPassword === null || $scope.confirmPassword === "") { $scope.passwordMatchError = false; }
+                if ($scope.user.password === $scope.confirmPassword || $scope.confirmPassword === null || $scope.confirmPassword === "") { $scope.passwordMatchError = false; }
                 else { $scope.passwordMatchError = true; }
             };
 
